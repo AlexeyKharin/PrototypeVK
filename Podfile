@@ -6,5 +6,9 @@ target 'PrototypeVK' do
   use_frameworks!
 
   # Pods for PrototypeVK
+	pod 'Firebase'
+	pod 'Firebase/Auth'
+	pod 'FlagPhoneNumber'
+	pod 'SnapKit', '~> 5.0.0'
 
 end
