@@ -22,6 +22,8 @@
 		B49C783F2845308A00D9FFB1 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */; };
 		B49C784228467BE700D9FFB1 /* BlackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C784128467BE700D9FFB1 /* BlackMode.swift */; };
 		B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C7843284680CF00D9FFB1 /* CustomColors.swift */; };
+		B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C78482852658200D9FFB1 /* infoAuth.strings */; };
+		B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C784B28526A2B00D9FFB1 /* Localizable.strings */; };
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
@@ -46,6 +48,8 @@
 		B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		B49C784128467BE700D9FFB1 /* BlackMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackMode.swift; sourceTree = "<group>"; };
 		B49C7843284680CF00D9FFB1 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		B49C78492852658300D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/infoAuth.strings; sourceTree = "<group>"; };
+		B49C784C28526A2B00D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
@@ -127,10 +131,20 @@
 			path = ColorMode;
 			sourceTree = "<group>";
 		};
+		B49C7845285262AB00D9FFB1 /* Localazation */ = {
+			isa = PBXGroup;
+			children = (
+				B49C78482852658200D9FFB1 /* infoAuth.strings */,
+				B49C784B28526A2B00D9FFB1 /* Localizable.strings */,
+			);
+			name = Localazation;
+			sourceTree = "<group>";
+		};
 		B4B10C3828424E0B0027C168 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
 				B456897C28312A2C007FA9F5 /* GoogleService-Info.plist */,
+				B49C7845285262AB00D9FFB1 /* Localazation */,
 				B4B10C3228424A190027C168 /* SignInViewController.swift */,
 				B4B10C3428424AB70027C168 /* LogInViewController.swift */,
 				B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */,
@@ -189,6 +203,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = B456895C28311CB1007FA9F5;
 			packageReferences = (
@@ -209,9 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B456897528311CB6007FA9F5 /* LaunchScreen.storyboard in Resources */,
+				B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */,
 				B456897D28312A2D007FA9F5 /* GoogleService-Info.plist in Resources */,
 				B456897228311CB6007FA9F5 /* Assets.xcassets in Resources */,
 				B456897028311CB1007FA9F5 /* Main.storyboard in Resources */,
+				B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +314,22 @@
 				B456897428311CB6007FA9F5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B49C78482852658200D9FFB1 /* infoAuth.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49C78492852658300D9FFB1 /* ru */,
+			);
+			name = infoAuth.strings;
+			sourceTree = "<group>";
+		};
+		B49C784B28526A2B00D9FFB1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49C784C28526A2B00D9FFB1 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
