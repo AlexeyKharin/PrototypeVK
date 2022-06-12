@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		79F566026E9676B4344E34C4 /* Pods_PrototypeVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */; };
+		B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3F6285616770079C09A /* TypeAuthorization.swift */; };
 		B4478D4C283A6A4100A4CDFB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */; };
 		B4478D4E283A6E5500A4CDFB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4478D4D283A6E5500A4CDFB /* Images.swift */; };
 		B4478D51283A92B500A4CDFB /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = B4478D50283A92B500A4CDFB /* iOSIntPackage */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PrototypeVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A503CF6E72C8060F8D17CC8 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
+		B437D3F6285616770079C09A /* TypeAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAuthorization.swift; sourceTree = "<group>"; };
 		B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B4478D4D283A6E5500A4CDFB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		B456896528311CB1007FA9F5 /* PrototypeVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototypeVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				B4B10C3228424A190027C168 /* SignInViewController.swift */,
 				B4B10C3428424AB70027C168 /* LogInViewController.swift */,
 				B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */,
+				B437D3F6285616770079C09A /* TypeAuthorization.swift */,
 				B4B10C392842B3120027C168 /* PhoneNumberText.swift */,
 				B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */,
 				B492CDE2283C08E000EF2DD2 /* PhoneNumberView.swift */,
@@ -292,6 +295,7 @@
 				B4478D4E283A6E5500A4CDFB /* Images.swift in Sources */,
 				B4B10C3A2842B3120027C168 /* PhoneNumberText.swift in Sources */,
 				B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */,
+				B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */,
 				B456896928311CB1007FA9F5 /* AppDelegate.swift in Sources */,
 				B456896B28311CB1007FA9F5 /* SceneDelegate.swift in Sources */,
 			);
