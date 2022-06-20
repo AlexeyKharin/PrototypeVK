@@ -65,7 +65,7 @@ class SignInViewController: UIViewController {
     
     private let returnLabel: UILabel = {
         let label = UILabel()
-        label.text = "С ВОЗВРАЩЕНИЕМ"
+        label.text = NSLocalizedString("Welcome Back", comment: "")
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor(red: 246/255, green: 151/255, blue: 7/255, alpha: 1.0)
         label.toAutoLayout()
@@ -75,8 +75,8 @@ class SignInViewController: UIViewController {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.numberOfLines = 0
-        label.textAlignment = .left
+        label.numberOfLines = 2
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor =  .blackWhite
         label.layer.shadowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).cgColor
@@ -84,17 +84,14 @@ class SignInViewController: UIViewController {
         label.layer.shadowOffset = CGSize(width: 0, height: 4)
         label.layer.shadowOpacity =  1.0
         label.alpha = 0.78
-        label.text = """
-        Введите номер телефона
-        для входа в прилрожение
-        """
+        label.text = NSLocalizedString("Enter phone number to \n enter the application", comment: "")
         return label
     }()
-    
+   
     lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Подтвердить", for: .normal)
+        button.setTitle(NSLocalizedString("Confirm", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .customBlack
         button.layer.cornerRadius = 10
@@ -104,13 +101,7 @@ class SignInViewController: UIViewController {
         button.addTarget(self, action: #selector(confirmPhoneNumber), for: .touchUpInside)
         return button
     }()
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        phoneNumber.layer.borderColor = UIColor.blackGreen.cgColor
-    }
-    
-       
+   
     @objc
     func confirmPhoneNumber() {
         
@@ -145,7 +136,6 @@ class SignInViewController: UIViewController {
         phoneNumber.delegate = self
         phoneNumber.layer.borderWidth = 1
         phoneNumber.toAutoLayout()
-    
         phoneNumber.addTarget(self, action: #selector(validNumber), for: .editingChanged)
         return phoneNumber
     }()
@@ -158,10 +148,15 @@ class SignInViewController: UIViewController {
         print(fpnTextFildd.text)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        phoneNumber.layer.borderColor = UIColor.blackGreen.cgColor
+    }
+       
     var listCotroller: FPNCountryListViewController = {
         let listCountry = FPNCountryListViewController(style: .grouped)
         
-        listCountry.title = "Страны"
+        listCountry.title = NSLocalizedString("Countries", comment: "")
         return listCountry
     }()
     
@@ -191,8 +186,7 @@ class SignInViewController: UIViewController {
             }
         }
         setUp()
-        
-//        phoneNumber.layer.borderColor = UIColor.blackGreenCGColor
+
     }
   
 
@@ -206,7 +200,9 @@ class SignInViewController: UIViewController {
         
         descriptionLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(returnLabel.snp.bottom).offset(26)
-            make.centerX.equalTo(returnLabel)
+//            make.left.equalTo(view.safeAreaLayoutGuide).offset(108)
+//            make.right.equalTo(view.safeAreaLayoutGuide).offset(-108)
+            make.centerX.equalTo(returnLabel.snp.centerX)
         }
 
         pickerView.snp.makeConstraints { (make) -> Void in

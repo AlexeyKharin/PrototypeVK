@@ -24,7 +24,7 @@ class AuthViewController: UIViewController {
     
     lazy var logInButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(TypeAuthorization.logIn.rawValue, for: .normal)
+        button.setTitle(NSLocalizedString(TypeAuthorization.logIn.rawValue, comment: "") , for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor.whiteBlack, for: .normal)
@@ -43,7 +43,7 @@ class AuthViewController: UIViewController {
     
     private let signInButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Уже есть аккаунт", for: .normal)
+        button.setTitle(NSLocalizedString("Already have account", comment: ""), for: .normal)
         button.setTitleColor(UIColor.blackWhite, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.addTarget(self, action: #selector(openSignController), for: .touchUpInside)

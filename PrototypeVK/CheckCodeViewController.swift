@@ -5,12 +5,6 @@ import FirebaseAuth
 import FlagPhoneNumber
 import SnapKit
 
-enum TypeAuthorization: String {
-    
-    case logIn = "Зарегестрироваться"
-    case sigIn = "Войти"
-}
-
 class CheckCodeViewController: UIViewController {
     
     var numberPhone: String
@@ -32,7 +26,7 @@ class CheckCodeViewController: UIViewController {
     
     private let authLabel: UILabel = {
         let label = UILabel()
-        label.text = "Подтверждение регистрации"
+        label.text = NSLocalizedString("Confirmation of registration", comment: "")
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor(red: 246/255, green: 151/255, blue: 7/255, alpha: 1.0)
         label.toAutoLayout()
@@ -41,7 +35,7 @@ class CheckCodeViewController: UIViewController {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Мы отправили SMS с кодом на номер"
+        label.text = NSLocalizedString("We sent an SMS with a code to the number", comment: "")
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .blackWhite
         label.toAutoLayout()
@@ -64,7 +58,7 @@ class CheckCodeViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor =  .grayMode
         label.alpha = 0.78
-        label.text = "Введите код из SMS"
+        label.text = NSLocalizedString("Enter code from SMS", comment: "")
         return label
     }()
     

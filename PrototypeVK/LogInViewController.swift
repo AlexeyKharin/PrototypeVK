@@ -23,7 +23,7 @@ class LogInViewController: UIViewController {
     
     private let logInLabel: UILabel = {
         let label = UILabel()
-        label.text = "ЗАРЕГЕСТРИРОВАТЬСЯ"
+        label.text = NSLocalizedString(TypeAuthorization.logIn.rawValue, comment: "")
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .blackOrange
         label.toAutoLayout()
@@ -32,7 +32,7 @@ class LogInViewController: UIViewController {
     
     private let tapNumber: UILabel = {
         let label = UILabel()
-        label.text = "Введите номер"
+        label.text = NSLocalizedString("Enter number", comment: "")
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .blackBlue
         label.toAutoLayout()
@@ -47,10 +47,7 @@ class LogInViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .grayMode
         label.alpha = 0.78
-        label.text = """
-        Ваш номер будет использоваться
-        для входа в аккаунт
-        """
+        label.text = NSLocalizedString("Your number will be used to \n log into your account", comment: "")
         return label
     }()
     
@@ -62,18 +59,14 @@ class LogInViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor =  .grayMode
         label.alpha = 0.78
-        label.text = """
-        Нажимая кнопку “Далее” Вы принимаете
-        пользовательское Соглашение и политику
-        конфедициальности
-        """
+        label.text = NSLocalizedString("By clicking the \"Next\" button you \n accept the User Agreement and \n Privacy Policy", comment: "")
         return label
     }()
   
     lazy var continuemButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Далее", for: .normal)
+        button.setTitle(NSLocalizedString("Next", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .customBlack
         button.layer.cornerRadius = 10
