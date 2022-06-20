@@ -2,16 +2,16 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import FlagPhoneNumber
+//import FlagPhoneNumber
 import SnapKit
 
 class CheckCodeViewController: UIViewController {
     
-    var numberPhone: String
-    
-    var typeAuthorization: TypeAuthorization
-    
-    var verificationID: String
+    private var numberPhone: String
+    private var typeAuthorization: TypeAuthorization
+    private var verificationID: String
+    var presenter: PresenterCheckCode?
+    var configurator: ConfiguratorCheckCode = ConfiguratorCheckCode()
     
     init(numberPhone: String, verificationID: String, typeAuthorization: TypeAuthorization) {
         self.typeAuthorization = typeAuthorization
@@ -96,7 +96,6 @@ class CheckCodeViewController: UIViewController {
         button.toAutoLayout()
         button.setTitle(typeAuthorization.rawValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        
         button.backgroundColor = .customBlack
         button.layer.cornerRadius = 10
         button.alpha = 0.6
@@ -109,23 +108,23 @@ class CheckCodeViewController: UIViewController {
     @objc
     func authorizationPhoneNumber() {
         guard let codeValidVC = codeVCTextField.text else { return }
-        let credetional = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: codeValidVC)
-        
-        Auth.auth().signIn(with: credetional) { (_, error) in
-            if error != nil {
-                let ac = UIAlertController(title: error?.localizedDescription, message: nil, preferredStyle: .alert)
-                let cancel = UIAlertAction(title: "Отмена", style: .cancel)
-                ac.addAction(cancel)
-                self.present(ac, animated: true)
-                print("Неудачно по ошибке codeValidVC")
-            } else {
-                let vc = ViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        presenter?.checkVerificationCode(withVerificationID: verificationID, verificationCode: codeValidVC)
+//        
+//        let credetional = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: codeValidVC)
+//
+//        Auth.auth().signIn(with: credetional) { (_, error) in
+//            if error != nil {
+//                let ac = UIAlertController(title: error?.localizedDescription, message: nil, preferredStyle: .alert)
+//                let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+//                ac.addAction(cancel)
+//                self.present(ac, animated: true)
+//
+//            } else {
+//                let vc = ViewController()
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
     }
-    
-    
     
     private let imageConfirmation: UIImageView = {
         let image = UIImageView()
@@ -136,9 +135,8 @@ class CheckCodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configurator.configure(with: self)
         view.backgroundColor = .whiteBlack
-        
         setUp()
     }
     
@@ -188,7 +186,6 @@ class CheckCodeViewController: UIViewController {
     }
 }
 
-
 extension CheckCodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -197,6 +194,7 @@ extension CheckCodeViewController: UITextFieldDelegate {
 }
 
 extension CheckCodeViewController: UITextViewDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentCharacterCount = textField.text?.count ?? 0
         if range.length + range.location > currentCharacterCount {
