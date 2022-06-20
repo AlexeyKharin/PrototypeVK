@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PrototypeVK
-//
-//  Created by Alexey Kharin on 15.05.2022.
-//
 
 import UIKit
 
@@ -17,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let authCOntroller = AuthViewController()
+//        let authCOntroller = CheckCodeViewController(numberPhone: "+375296534897", verificationID: "", typeAuthorization: .logIn)
         let navigation = UINavigationController(rootViewController: authCOntroller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()

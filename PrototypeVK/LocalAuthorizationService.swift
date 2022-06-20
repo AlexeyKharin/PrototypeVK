@@ -59,12 +59,10 @@ class LocalAuthorizationService {
         return type
     }
     
-    func biometryImage() -> UIImage {
-        
+    var biometryImage: UIImage {
         var type: BiometryType = supportedBiometryType()
         
         switch type {
-        
         case .dontSupportBiometry:
             return UIImage(systemName: "stop.circle.fill") ?? UIImage()
             
