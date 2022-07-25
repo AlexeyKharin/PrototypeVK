@@ -4,6 +4,8 @@
 <dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please allow to continue with face ID</string>
+	<key>CFBundleDisplayName</key>
+	<string>PrototypeVK</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

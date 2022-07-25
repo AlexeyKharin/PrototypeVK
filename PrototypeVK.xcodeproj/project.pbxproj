@@ -8,6 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		79F566026E9676B4344E34C4 /* Pods_PrototypeVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */; };
+		B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3F6285616770079C09A /* TypeAuthorization.swift */; };
+		B437D3F92857A2BD0079C09A /* OffsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3F82857A2BD0079C09A /* OffsetTextField.swift */; };
+		B437D3FC2857A7B20079C09A /* PresenterSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3FB2857A7B20079C09A /* PresenterSignIn.swift */; };
+		B437D3FE2857A7D00079C09A /* RouterSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3FD2857A7D00079C09A /* RouterSignIn.swift */; };
+		B437D4002857A7E50079C09A /* InteractorSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3FF2857A7E50079C09A /* InteractorSignIn.swift */; };
+		B437D4022857A8BF0079C09A /* ConfiguratorSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D4012857A8BF0079C09A /* ConfiguratorSignIn.swift */; };
+		B437D40D2857BCE70079C09A /* SignInRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D40C2857BCE70079C09A /* SignInRouterProtocol.swift */; };
+		B437D40F2858FAF70079C09A /* FPNService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D40E2858FAF60079C09A /* FPNService.swift */; };
+		B437D413285A74EB0079C09A /* SignInInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D412285A74EB0079C09A /* SignInInteractorOutput.swift */; };
+		B437D415285A75090079C09A /* SignInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D414285A75090079C09A /* SignInteractorInput.swift */; };
+		B437D417285A75AC0079C09A /* SignInPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D416285A75AC0079C09A /* SignInPresenterProtocol.swift */; };
+		B437D419285F9F390079C09A /* SignInViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D418285F9F380079C09A /* SignInViewProtocol.swift */; };
+		B437D425285FB3AD0079C09A /* PresenterLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D424285FB3AD0079C09A /* PresenterLogIn.swift */; };
+		B437D427285FB3C10079C09A /* InteractorLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D426285FB3C10079C09A /* InteractorLogIn.swift */; };
+		B437D429285FB3CF0079C09A /* ConfiguratorLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D428285FB3CF0079C09A /* ConfiguratorLogIn.swift */; };
+		B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D42A285FB3DA0079C09A /* RouterLogIn.swift */; };
+		B437D42D285FB49B0079C09A /* LogInViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D42C285FB49B0079C09A /* LogInViewProtocol.swift */; };
+		B437D42F285FB4DF0079C09A /* LogInPresenterProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D42E285FB4DF0079C09A /* LogInPresenterProtocol .swift */; };
+		B437D431285FB5120079C09A /* LogInInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D430285FB5120079C09A /* LogInInteractorInput.swift */; };
+		B437D433285FB55C0079C09A /* LogInInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D432285FB55C0079C09A /* LogInInteractorOutput.swift */; };
+		B437D435285FB5D30079C09A /* LogInRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D434285FB5D30079C09A /* LogInRouterProtocol.swift */; };
+		B437D4402860DB550079C09A /* PresenterCheckCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D43F2860DB550079C09A /* PresenterCheckCode.swift */; };
+		B437D4422860DB640079C09A /* InteractorCheckCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D4412860DB640079C09A /* InteractorCheckCode.swift */; };
+		B437D4442860DB750079C09A /* ConfiguratorCheckCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D4432860DB750079C09A /* ConfiguratorCheckCode.swift */; };
+		B437D4462860DB810079C09A /* RouterCheckCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D4452860DB810079C09A /* RouterCheckCode.swift */; };
 		B4478D4C283A6A4100A4CDFB /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */; };
 		B4478D4E283A6E5500A4CDFB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4478D4D283A6E5500A4CDFB /* Images.swift */; };
 		B4478D51283A92B500A4CDFB /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = B4478D50283A92B500A4CDFB /* iOSIntPackage */; };
@@ -22,15 +47,41 @@
 		B49C783F2845308A00D9FFB1 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */; };
 		B49C784228467BE700D9FFB1 /* BlackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C784128467BE700D9FFB1 /* BlackMode.swift */; };
 		B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C7843284680CF00D9FFB1 /* CustomColors.swift */; };
+		B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C78482852658200D9FFB1 /* infoAuth.strings */; };
+		B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C784B28526A2B00D9FFB1 /* Localizable.strings */; };
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
-		B4B10C3A2842B3120027C168 /* PhoneNumberText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C392842B3120027C168 /* PhoneNumberText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PrototypeVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A503CF6E72C8060F8D17CC8 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
+		B437D3F6285616770079C09A /* TypeAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAuthorization.swift; sourceTree = "<group>"; };
+		B437D3F82857A2BD0079C09A /* OffsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetTextField.swift; sourceTree = "<group>"; };
+		B437D3FB2857A7B20079C09A /* PresenterSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterSignIn.swift; sourceTree = "<group>"; };
+		B437D3FD2857A7D00079C09A /* RouterSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterSignIn.swift; sourceTree = "<group>"; };
+		B437D3FF2857A7E50079C09A /* InteractorSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorSignIn.swift; sourceTree = "<group>"; };
+		B437D4012857A8BF0079C09A /* ConfiguratorSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorSignIn.swift; sourceTree = "<group>"; };
+		B437D40C2857BCE70079C09A /* SignInRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouterProtocol.swift; sourceTree = "<group>"; };
+		B437D40E2858FAF60079C09A /* FPNService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FPNService.swift; path = SignInViper/FPNService.swift; sourceTree = "<group>"; };
+		B437D412285A74EB0079C09A /* SignInInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractorOutput.swift; sourceTree = "<group>"; };
+		B437D414285A75090079C09A /* SignInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInteractorInput.swift; sourceTree = "<group>"; };
+		B437D416285A75AC0079C09A /* SignInPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenterProtocol.swift; sourceTree = "<group>"; };
+		B437D418285F9F380079C09A /* SignInViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewProtocol.swift; sourceTree = "<group>"; };
+		B437D424285FB3AD0079C09A /* PresenterLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterLogIn.swift; sourceTree = "<group>"; };
+		B437D426285FB3C10079C09A /* InteractorLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorLogIn.swift; sourceTree = "<group>"; };
+		B437D428285FB3CF0079C09A /* ConfiguratorLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorLogIn.swift; sourceTree = "<group>"; };
+		B437D42A285FB3DA0079C09A /* RouterLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterLogIn.swift; sourceTree = "<group>"; };
+		B437D42C285FB49B0079C09A /* LogInViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewProtocol.swift; sourceTree = "<group>"; };
+		B437D42E285FB4DF0079C09A /* LogInPresenterProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogInPresenterProtocol .swift"; sourceTree = "<group>"; };
+		B437D430285FB5120079C09A /* LogInInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInteractorInput.swift; sourceTree = "<group>"; };
+		B437D432285FB55C0079C09A /* LogInInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInteractorOutput.swift; sourceTree = "<group>"; };
+		B437D434285FB5D30079C09A /* LogInRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInRouterProtocol.swift; sourceTree = "<group>"; };
+		B437D43F2860DB550079C09A /* PresenterCheckCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterCheckCode.swift; sourceTree = "<group>"; };
+		B437D4412860DB640079C09A /* InteractorCheckCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorCheckCode.swift; sourceTree = "<group>"; };
+		B437D4432860DB750079C09A /* ConfiguratorCheckCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorCheckCode.swift; sourceTree = "<group>"; };
+		B437D4452860DB810079C09A /* RouterCheckCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterCheckCode.swift; sourceTree = "<group>"; };
 		B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		B4478D4D283A6E5500A4CDFB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		B456896528311CB1007FA9F5 /* PrototypeVK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrototypeVK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,10 +97,11 @@
 		B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		B49C784128467BE700D9FFB1 /* BlackMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackMode.swift; sourceTree = "<group>"; };
 		B49C7843284680CF00D9FFB1 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		B49C78492852658300D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/infoAuth.strings; sourceTree = "<group>"; };
+		B49C784C28526A2B00D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
-		B4B10C392842B3120027C168 /* PhoneNumberText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberText.swift; sourceTree = "<group>"; };
 		E968E501173D69F3928EDB30 /* Pods-PrototypeVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.release.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +133,173 @@
 				E968E501173D69F3928EDB30 /* Pods-PrototypeVK.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B437D3FA2857A77E0079C09A /* SignInViper */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4032857B42E0079C09A /* SignInView */,
+				B437D4042857B4630079C09A /* SignInPresenter */,
+				B437D4052857B4850079C09A /* SignInRouter */,
+				B437D4092857B4A90079C09A /* SignInInteractor */,
+				B437D40A2857B4C60079C09A /* SignInConfigurator */,
+			);
+			path = SignInViper;
+			sourceTree = "<group>";
+		};
+		B437D4032857B42E0079C09A /* SignInView */ = {
+			isa = PBXGroup;
+			children = (
+				B4B10C3228424A190027C168 /* SignInViewController.swift */,
+				B437D418285F9F380079C09A /* SignInViewProtocol.swift */,
+			);
+			name = SignInView;
+			sourceTree = "<group>";
+		};
+		B437D4042857B4630079C09A /* SignInPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D3FB2857A7B20079C09A /* PresenterSignIn.swift */,
+				B437D416285A75AC0079C09A /* SignInPresenterProtocol.swift */,
+			);
+			path = SignInPresenter;
+			sourceTree = "<group>";
+		};
+		B437D4052857B4850079C09A /* SignInRouter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D3FD2857A7D00079C09A /* RouterSignIn.swift */,
+				B437D40C2857BCE70079C09A /* SignInRouterProtocol.swift */,
+			);
+			name = SignInRouter;
+			sourceTree = "<group>";
+		};
+		B437D4092857B4A90079C09A /* SignInInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				B437D3FF2857A7E50079C09A /* InteractorSignIn.swift */,
+				B437D414285A75090079C09A /* SignInteractorInput.swift */,
+				B437D412285A74EB0079C09A /* SignInInteractorOutput.swift */,
+			);
+			path = SignInInteractor;
+			sourceTree = "<group>";
+		};
+		B437D40A2857B4C60079C09A /* SignInConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4012857A8BF0079C09A /* ConfiguratorSignIn.swift */,
+			);
+			name = SignInConfigurator;
+			sourceTree = "<group>";
+		};
+		B437D41A285FB1C90079C09A /* LogInViper */ = {
+			isa = PBXGroup;
+			children = (
+				B437D41B285FB1DA0079C09A /* LogInView */,
+				B437D41D285FB1EF0079C09A /* LogInPresenter */,
+				B437D423285FB2D40079C09A /* LogInInteractor */,
+				B437D422285FB2A60079C09A /* LogInConfigurator */,
+				B437D41F285FB2090079C09A /* LogInRouter */,
+			);
+			name = LogInViper;
+			sourceTree = "<group>";
+		};
+		B437D41B285FB1DA0079C09A /* LogInView */ = {
+			isa = PBXGroup;
+			children = (
+				B437D40E2858FAF60079C09A /* FPNService.swift */,
+				B4B10C3428424AB70027C168 /* LogInViewController.swift */,
+				B437D42C285FB49B0079C09A /* LogInViewProtocol.swift */,
+			);
+			name = LogInView;
+			sourceTree = "<group>";
+		};
+		B437D41D285FB1EF0079C09A /* LogInPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D424285FB3AD0079C09A /* PresenterLogIn.swift */,
+				B437D42E285FB4DF0079C09A /* LogInPresenterProtocol .swift */,
+			);
+			name = LogInPresenter;
+			sourceTree = "<group>";
+		};
+		B437D41F285FB2090079C09A /* LogInRouter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D42A285FB3DA0079C09A /* RouterLogIn.swift */,
+				B437D434285FB5D30079C09A /* LogInRouterProtocol.swift */,
+			);
+			name = LogInRouter;
+			sourceTree = "<group>";
+		};
+		B437D422285FB2A60079C09A /* LogInConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				B437D428285FB3CF0079C09A /* ConfiguratorLogIn.swift */,
+			);
+			name = LogInConfigurator;
+			sourceTree = "<group>";
+		};
+		B437D423285FB2D40079C09A /* LogInInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				B437D426285FB3C10079C09A /* InteractorLogIn.swift */,
+				B437D430285FB5120079C09A /* LogInInteractorInput.swift */,
+				B437D432285FB55C0079C09A /* LogInInteractorOutput.swift */,
+			);
+			name = LogInInteractor;
+			sourceTree = "<group>";
+		};
+		B437D4382860D9180079C09A /* CheckCodeViper */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4392860D9A70079C09A /* CheckCodeView */,
+				B437D43A2860D9B80079C09A /* CheckCodePresenter */,
+				B437D43C2860D9D00079C09A /* CheckCodeInteractor */,
+				B437D43E2860DB110079C09A /* CheckCodeConfigurator */,
+				B437D43D2860DAFD0079C09A /* CheckCodeRouter */,
+			);
+			name = CheckCodeViper;
+			sourceTree = "<group>";
+		};
+		B437D4392860D9A70079C09A /* CheckCodeView */ = {
+			isa = PBXGroup;
+			children = (
+				B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */,
+			);
+			name = CheckCodeView;
+			sourceTree = "<group>";
+		};
+		B437D43A2860D9B80079C09A /* CheckCodePresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D43F2860DB550079C09A /* PresenterCheckCode.swift */,
+			);
+			name = CheckCodePresenter;
+			sourceTree = "<group>";
+		};
+		B437D43C2860D9D00079C09A /* CheckCodeInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4412860DB640079C09A /* InteractorCheckCode.swift */,
+			);
+			name = CheckCodeInteractor;
+			sourceTree = "<group>";
+		};
+		B437D43D2860DAFD0079C09A /* CheckCodeRouter */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4452860DB810079C09A /* RouterCheckCode.swift */,
+			);
+			name = CheckCodeRouter;
+			sourceTree = "<group>";
+		};
+		B437D43E2860DB110079C09A /* CheckCodeConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				B437D4432860DB750079C09A /* ConfiguratorCheckCode.swift */,
+			);
+			name = CheckCodeConfigurator;
 			sourceTree = "<group>";
 		};
 		B456895C28311CB1007FA9F5 = {
@@ -127,14 +346,25 @@
 			path = ColorMode;
 			sourceTree = "<group>";
 		};
+		B49C7845285262AB00D9FFB1 /* Localazation */ = {
+			isa = PBXGroup;
+			children = (
+				B49C78482852658200D9FFB1 /* infoAuth.strings */,
+				B49C784B28526A2B00D9FFB1 /* Localizable.strings */,
+			);
+			name = Localazation;
+			sourceTree = "<group>";
+		};
 		B4B10C3828424E0B0027C168 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
 				B456897C28312A2C007FA9F5 /* GoogleService-Info.plist */,
-				B4B10C3228424A190027C168 /* SignInViewController.swift */,
-				B4B10C3428424AB70027C168 /* LogInViewController.swift */,
-				B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */,
-				B4B10C392842B3120027C168 /* PhoneNumberText.swift */,
+				B49C7845285262AB00D9FFB1 /* Localazation */,
+				B437D3FA2857A77E0079C09A /* SignInViper */,
+				B437D41A285FB1C90079C09A /* LogInViper */,
+				B437D4382860D9180079C09A /* CheckCodeViper */,
+				B437D3F6285616770079C09A /* TypeAuthorization.swift */,
+				B437D3F82857A2BD0079C09A /* OffsetTextField.swift */,
 				B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */,
 				B492CDE2283C08E000EF2DD2 /* PhoneNumberView.swift */,
 				B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */,
@@ -189,6 +419,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = B456895C28311CB1007FA9F5;
 			packageReferences = (
@@ -209,9 +440,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B456897528311CB6007FA9F5 /* LaunchScreen.storyboard in Resources */,
+				B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */,
 				B456897D28312A2D007FA9F5 /* GoogleService-Info.plist in Resources */,
 				B456897228311CB6007FA9F5 /* Assets.xcassets in Resources */,
 				B456897028311CB1007FA9F5 /* Main.storyboard in Resources */,
+				B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,18 +497,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B437D3FC2857A7B20079C09A /* PresenterSignIn.swift in Sources */,
+				B437D40F2858FAF70079C09A /* FPNService.swift in Sources */,
+				B437D419285F9F390079C09A /* SignInViewProtocol.swift in Sources */,
 				B49C783F2845308A00D9FFB1 /* LocalAuthorizationService.swift in Sources */,
+				B437D4402860DB550079C09A /* PresenterCheckCode.swift in Sources */,
+				B437D415285A75090079C09A /* SignInteractorInput.swift in Sources */,
 				B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */,
 				B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */,
+				B437D42F285FB4DF0079C09A /* LogInPresenterProtocol .swift in Sources */,
 				B492CDE3283C08E000EF2DD2 /* PhoneNumberView.swift in Sources */,
+				B437D4442860DB750079C09A /* ConfiguratorCheckCode.swift in Sources */,
 				B4478D4C283A6A4100A4CDFB /* AuthViewController.swift in Sources */,
+				B437D429285FB3CF0079C09A /* ConfiguratorLogIn.swift in Sources */,
+				B437D3FE2857A7D00079C09A /* RouterSignIn.swift in Sources */,
 				B49C784228467BE700D9FFB1 /* BlackMode.swift in Sources */,
+				B437D4002857A7E50079C09A /* InteractorSignIn.swift in Sources */,
+				B437D435285FB5D30079C09A /* LogInRouterProtocol.swift in Sources */,
 				B456896D28311CB1007FA9F5 /* ViewController.swift in Sources */,
+				B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */,
 				B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */,
+				B437D4422860DB640079C09A /* InteractorCheckCode.swift in Sources */,
+				B437D427285FB3C10079C09A /* InteractorLogIn.swift in Sources */,
 				B4478D4E283A6E5500A4CDFB /* Images.swift in Sources */,
-				B4B10C3A2842B3120027C168 /* PhoneNumberText.swift in Sources */,
 				B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */,
+				B437D425285FB3AD0079C09A /* PresenterLogIn.swift in Sources */,
+				B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */,
 				B456896928311CB1007FA9F5 /* AppDelegate.swift in Sources */,
+				B437D42D285FB49B0079C09A /* LogInViewProtocol.swift in Sources */,
+				B437D431285FB5120079C09A /* LogInInteractorInput.swift in Sources */,
+				B437D4462860DB810079C09A /* RouterCheckCode.swift in Sources */,
+				B437D40D2857BCE70079C09A /* SignInRouterProtocol.swift in Sources */,
+				B437D3F92857A2BD0079C09A /* OffsetTextField.swift in Sources */,
+				B437D433285FB55C0079C09A /* LogInInteractorOutput.swift in Sources */,
+				B437D413285A74EB0079C09A /* SignInInteractorOutput.swift in Sources */,
+				B437D4022857A8BF0079C09A /* ConfiguratorSignIn.swift in Sources */,
+				B437D417285A75AC0079C09A /* SignInPresenterProtocol.swift in Sources */,
 				B456896B28311CB1007FA9F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +554,22 @@
 				B456897428311CB6007FA9F5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B49C78482852658200D9FFB1 /* infoAuth.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49C78492852658300D9FFB1 /* ru */,
+			);
+			name = infoAuth.strings;
+			sourceTree = "<group>";
+		};
+		B49C784B28526A2B00D9FFB1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49C784C28526A2B00D9FFB1 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -2,22 +2,16 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-import FlagPhoneNumber
+//import FlagPhoneNumber
 import SnapKit
-
-enum TypeAuthorization: String {
-    
-    case logIn = "Зарегестрироваться"
-    case sigIn = "Войти"
-}
 
 class CheckCodeViewController: UIViewController {
     
-    var numberPhone: String
-    
-    var typeAuthorization: TypeAuthorization
-    
-    var verificationID: String
+    private var numberPhone: String
+    private var typeAuthorization: TypeAuthorization
+    private var verificationID: String
+    var presenter: PresenterCheckCode?
+    var configurator: ConfiguratorCheckCode = ConfiguratorCheckCode()
     
     init(numberPhone: String, verificationID: String, typeAuthorization: TypeAuthorization) {
         self.typeAuthorization = typeAuthorization
@@ -32,7 +26,7 @@ class CheckCodeViewController: UIViewController {
     
     private let authLabel: UILabel = {
         let label = UILabel()
-        label.text = "Подтверждение регистрации"
+        label.text = NSLocalizedString("Confirmation of registration", comment: "")
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor(red: 246/255, green: 151/255, blue: 7/255, alpha: 1.0)
         label.toAutoLayout()
@@ -41,7 +35,7 @@ class CheckCodeViewController: UIViewController {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Мы отправили SMS с кодом на номер"
+        label.text = NSLocalizedString("We sent an SMS with a code to the number", comment: "")
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .blackWhite
         label.toAutoLayout()
@@ -64,7 +58,7 @@ class CheckCodeViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor =  .grayMode
         label.alpha = 0.78
-        label.text = "Введите код из SMS"
+        label.text = NSLocalizedString("Enter code from SMS", comment: "")
         return label
     }()
     
@@ -102,7 +96,6 @@ class CheckCodeViewController: UIViewController {
         button.toAutoLayout()
         button.setTitle(typeAuthorization.rawValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        
         button.backgroundColor = .customBlack
         button.layer.cornerRadius = 10
         button.alpha = 0.6
@@ -115,23 +108,23 @@ class CheckCodeViewController: UIViewController {
     @objc
     func authorizationPhoneNumber() {
         guard let codeValidVC = codeVCTextField.text else { return }
-        let credetional = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: codeValidVC)
-        
-        Auth.auth().signIn(with: credetional) { (_, error) in
-            if error != nil {
-                let ac = UIAlertController(title: error?.localizedDescription, message: nil, preferredStyle: .alert)
-                let cancel = UIAlertAction(title: "Отмена", style: .cancel)
-                ac.addAction(cancel)
-                self.present(ac, animated: true)
-                print("Неудачно по ошибке codeValidVC")
-            } else {
-                let vc = ViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        presenter?.checkVerificationCode(withVerificationID: verificationID, verificationCode: codeValidVC)
+//        
+//        let credetional = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: codeValidVC)
+//
+//        Auth.auth().signIn(with: credetional) { (_, error) in
+//            if error != nil {
+//                let ac = UIAlertController(title: error?.localizedDescription, message: nil, preferredStyle: .alert)
+//                let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+//                ac.addAction(cancel)
+//                self.present(ac, animated: true)
+//
+//            } else {
+//                let vc = ViewController()
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
     }
-    
-    
     
     private let imageConfirmation: UIImageView = {
         let image = UIImageView()
@@ -142,9 +135,8 @@ class CheckCodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configurator.configure(with: self)
         view.backgroundColor = .whiteBlack
-        
         setUp()
     }
     
@@ -194,7 +186,6 @@ class CheckCodeViewController: UIViewController {
     }
 }
 
-
 extension CheckCodeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -203,6 +194,7 @@ extension CheckCodeViewController: UITextFieldDelegate {
 }
 
 extension CheckCodeViewController: UITextViewDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentCharacterCount = textField.text?.count ?? 0
         if range.length + range.location > currentCharacterCount {

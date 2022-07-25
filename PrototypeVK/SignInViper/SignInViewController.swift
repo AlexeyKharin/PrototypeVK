@@ -7,16 +7,10 @@ import SnapKit
 
 class SignInViewController: UIViewController {
     
-    var authorizationService = LocalAuthorizationService()
-    
-    var phoneString: String?
-    
-    private lazy var biometryImage: UIImageView = {
-        let image = UIImageView()
-        image.image = authorizationService.biometryImage()
-        return image
-    }()
-    
+    var arrayCountries: [FPNCountry]?
+    var presenter: SignInPresenterProtocol?
+    let configurator: ConfiguratorSignIn = ConfiguratorSignIn()
+            
     private lazy var buttonAuthorization: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
@@ -25,29 +19,13 @@ class SignInViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.setImage(biometryImage.image!.applyingSymbolConfiguration(.init(scale: .large))!.withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
         button.addTarget(self, action: #selector(faceOrTouchID), for: .touchUpInside)
         
         return button
     }()
     
     @objc func faceOrTouchID() {
-        authorizationService.authorizeIfPossible { [weak self] (result) in
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    let vc = ViewController()
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                    
-                case .failure:
-                    self?.showAlerAuthorization(tittle: "Ошибка при аутентификации", message: "Попробуйте снова")
-                    
-                case .featureFailure:
-                    self?.showAlerAuthorization(tittle: "Недоступно", message: "Данный инструмент не доуступен")
-                }
-            }
-        }
+        presenter?.attemptBiometricAuthorization()
     }
     
     private lazy var didSelectPickerView: UITapGestureRecognizer = {
@@ -59,24 +37,23 @@ class SignInViewController: UIViewController {
     
     @objc
     func didSelect(_ tap: UILongPressGestureRecognizer) {
-        let navigationController = UINavigationController(rootViewController: listCotroller)
-        self.present(navigationController, animated: true)
+        presenter?.doubleTap()
     }
     
     private let returnLabel: UILabel = {
         let label = UILabel()
-        label.text = "С ВОЗВРАЩЕНИЕМ"
+        label.text = NSLocalizedString("Welcome Back", comment: "")
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor(red: 246/255, green: 151/255, blue: 7/255, alpha: 1.0)
         label.toAutoLayout()
         return label
     }()
- 
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.numberOfLines = 0
-        label.textAlignment = .left
+        label.numberOfLines = 2
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.textColor =  .blackWhite
         label.layer.shadowColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.3).cgColor
@@ -84,17 +61,14 @@ class SignInViewController: UIViewController {
         label.layer.shadowOffset = CGSize(width: 0, height: 4)
         label.layer.shadowOpacity =  1.0
         label.alpha = 0.78
-        label.text = """
-        Введите номер телефона
-        для входа в прилрожение
-        """
+        label.text = NSLocalizedString("Enter phone number to \n enter the application", comment: "")
         return label
     }()
     
     lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Подтвердить", for: .normal)
+        button.setTitle(NSLocalizedString("Confirm", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .customBlack
         button.layer.cornerRadius = 10
@@ -105,27 +79,9 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        phoneNumber.layer.borderColor = UIColor.blackGreen.cgColor
-    }
-    
-       
     @objc
     func confirmPhoneNumber() {
-        
-        guard let phoneString = phoneString else { return }
-
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneString, uiDelegate: nil) { (verificationID, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "is empty")
-                
-            } else {
-                guard let verificationID = verificationID else { return }
-                let vc = CheckCodeViewController(numberPhone: phoneString, verificationID: verificationID, typeAuthorization: .sigIn)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
+        presenter?.verificationOfPhoneNumber()
     }
     
     lazy var pickerView: UIPickerView = {
@@ -139,63 +95,41 @@ class SignInViewController: UIViewController {
     
     lazy var phoneNumber: OffsetTextField = {
         let phoneNumber = OffsetTextField()
-        phoneNumber.placeholder = fpnTextFildd.placeholder
         phoneNumber.returnKeyType = .default
         phoneNumber.layer.cornerRadius = 10
         phoneNumber.delegate = self
         phoneNumber.layer.borderWidth = 1
         phoneNumber.toAutoLayout()
-    
         phoneNumber.addTarget(self, action: #selector(validNumber), for: .editingChanged)
         return phoneNumber
     }()
     
     @objc
     func validNumber() {
-        fpnTextFildd.text = phoneNumber.text
-        fpnTextFildd.didEditText()
-        print(fpnTextFildd.phoneCodeTextField.text)
-        print(fpnTextFildd.text)
+        guard let phoneNumber = phoneNumber.text else { return }
+        presenter?.requestFullPhoneNumber(number: phoneNumber)
+        
     }
     
-    var listCotroller: FPNCountryListViewController = {
-        let listCountry = FPNCountryListViewController(style: .grouped)
-        
-        listCountry.title = "Страны"
-        return listCountry
-    }()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        phoneNumber.layer.borderColor = UIColor.blackGreen.cgColor
+    }
     
-    var fpnTextFildd: FPNTextField = {
-        let fpnTextFildd = FPNTextField()
-        fpnTextFildd.displayMode = .list
-        return fpnTextFildd
-    }()
+    override func viewWillAppear (_ animated: Bool) {
+        super.viewWillAppear(true)
+        presenter?.configureDate()
+        selectComponentInPickerView(row: 0)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        configurator.configure(with: self)
         view.backgroundColor = .whiteBlack
-        fpnTextFildd.delegate = self
-        listCotroller.setup(repository: fpnTextFildd.countryRepository)
-        
-        listCotroller.didSelect = { [weak self] country in
-            self?.fpnTextFildd.setFlag(countryCode: country.code)
-            let array = self?.fpnTextFildd.countryRepository.countries
-            if let currentIndex = array?.firstIndex(of: country) {
-                let index: Int = Int(currentIndex)
-                self?.pickerView.selectRow(index, inComponent: 0, animated: true)
-//                self?.phoneNumber.placeholder = self?.fpnTextFildd.placeholder
-                self?.fpnTextFildd.phoneCodeTextField.text = country.phoneCode
-                self?.phoneNumber.text = ""
-            }
-        }
         setUp()
-        
-//        phoneNumber.layer.borderColor = UIColor.blackGreenCGColor
     }
-  
-
+    
     func setUp() {
         [returnLabel, descriptionLabel, confirmButton, phoneNumber, pickerView, buttonAuthorization].forEach { view.addSubview($0) }
         
@@ -206,9 +140,9 @@ class SignInViewController: UIViewController {
         
         descriptionLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(returnLabel.snp.bottom).offset(26)
-            make.centerX.equalTo(returnLabel)
+            make.centerX.equalTo(returnLabel.snp.centerX)
         }
-
+        
         pickerView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(12)
             make.left.equalTo(descriptionLabel.snp.left).offset(-40)
@@ -222,7 +156,7 @@ class SignInViewController: UIViewController {
             make.right.equalTo(view.safeAreaLayoutGuide).offset(-78)
             make.height.equalTo(48)
         }
-
+        
         confirmButton.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(phoneNumber.snp.bottom).offset(100)
             make.left.equalTo(view.safeAreaLayoutGuide).offset(98)
@@ -243,7 +177,8 @@ extension SignInViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return fpnTextFildd.countryRepository.countries.count }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return arrayCountries?.count ?? 0
+    }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 40.0
@@ -254,54 +189,14 @@ extension SignInViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
-        let model = fpnTextFildd.countryRepository.countries[row]
-        
-        return PhoneNumberView.create(icon: model.flag ?? UIImage(), title: model.phoneCode)
+        let model = arrayCountries?[row]
+        return PhoneNumberView.create(icon: model?.flag ?? UIImage(), title: model!.phoneCode)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        let country = fpnTextFildd.countryRepository.countries[row]
-        fpnTextFildd.setFlag(countryCode: country.code)
-        phoneNumber.placeholder = fpnTextFildd.placeholder
-    }
-}
-
-extension SignInViewController: FPNTextFieldDelegate {
-    
-    func fpnDidSelectCountry(name: String, dialCode: String, code: String) {
-        ///
-    }
-    
-    func fpnDidValidatePhoneNumber(textField: FPNTextField, isValid: Bool) {
-        
-        if isValid {
-            print(true)
-            confirmButton.isEnabled = true
-            confirmButton.alpha = 1
-            phoneString = textField.getFormattedPhoneNumber(format: .International)
-            
-        } else {
-            confirmButton.isEnabled = false
-            confirmButton.alpha = 0.5
-            print(false)
-        }
-    }
-    
-    func fpnDisplayCountryList() {
-        
-    }
-}
-
-class OffsetTextField: UITextField {
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10 , dy: 10)
-    }
-    
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 10)
-        
+        guard let arrayCountries = arrayCountries else { return }
+        let country = arrayCountries[row]
+        presenter?.getPhoneCodeExample(country: country)
     }
 }
 
@@ -312,14 +207,35 @@ extension SignInViewController: UITextFieldDelegate {
     }
 }
 
-
-extension SignInViewController {
+extension SignInViewController: SignInViewProtocol {
     
-    func showAlerAuthorization(tittle: String, message: String) {
-        let alert = UIAlertController(title: tittle, message: message, preferredStyle: .alert)
-        let dissmisAction = UIAlertAction(title: "Закрыть", style: .cancel)
+    func validationPhoneNumber(isValid: Bool) {
+        if isValid {
+            confirmButton.isEnabled = true
+            confirmButton.alpha = 1
+            
+        } else {
+            confirmButton.isEnabled = false
+            confirmButton.alpha = 0.5
+        }
+    }
+    
+    func selectComponentInPickerView(row: Int) {
+        pickerView.selectRow(row, inComponent: 0, animated: true)
         
-        alert.addAction(dissmisAction)
-        present(alert, animated: true)
+        guard let country = arrayCountries?[row] else { return }
+        presenter?.getPhoneCodeExample(country: country)
+    }
+    
+    func generateCountries(_ countries: [FPNCountry]) {
+        arrayCountries = countries
+    }
+    
+    func upDatePlaceHolder(typePhone: String) {
+        phoneNumber.placeholder = typePhone
+    }
+    
+    func setBiometricImage(_ image: UIImage) {
+        buttonAuthorization.setImage(image.applyingSymbolConfiguration(.init(scale: .large))!.withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
     }
 }
