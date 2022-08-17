@@ -2,11 +2,10 @@
 import Foundation
 import UIKit
 import SnapKit
-import FlagPhoneNumber
-import Firebase
-import FirebaseAuth
 
 class AuthViewController: UIViewController {
+    
+    var presenter: AuthPresenterProtocol?
     
     var index: Int = 0
     
@@ -14,6 +13,7 @@ class AuthViewController: UIViewController {
     
     var phoneString: String?
     
+    let configurator: ConfiguratorAuth = ConfiguratorAuth()
     
     private let imageGreetings: UIImageView = {
         let image = UIImageView()
@@ -37,8 +37,7 @@ class AuthViewController: UIViewController {
     
     @objc
     func openLogInController() {
-        let vc = LogInViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.openLogInController()
     }
     
     private let signInButton: UIButton = {
@@ -52,14 +51,14 @@ class AuthViewController: UIViewController {
     
     @objc
     private func openSignController() {
-        let vc = SignInViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.openSignController()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         view.backgroundColor = .whiteBlack
+        configurator.configure(with: self)
     }
     
     func setUp() {

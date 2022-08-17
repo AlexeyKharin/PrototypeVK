@@ -6,7 +6,7 @@ import FirebaseAuth
 
 class InteractorSignIn: SignInteractorInput {
     
-    var outPut: SignInInteractorOutput?
+    weak var outPut: SignInInteractorOutput?
     
     var fPNService: FPNService = FPNService()
     
@@ -20,6 +20,23 @@ class InteractorSignIn: SignInteractorInput {
         fPNService.closureValidation = { [weak self] isValid in
             self?.outPut?.validation(isValid: isValid)
         }
+    }
+    
+    
+    func prepareArrayOfCountries() -> [CountryType]? {
+        
+        let biometricImage = authorizationService.biometryImage
+        outPut?.setBiometricImage(image: biometricImage)
+        
+        let countries = fPNService.fpnTextFildd.countryRepository.countries.map { CountryType(
+            name: $0.name,
+            phoneCode: $0.phoneCode,
+            flag: UIImage(named: $0.code.rawValue, in: Bundle.FlagIcons, compatibleWith: nil),
+            code: $0.code.rawValue )
+        }
+        
+        return countries
+        
     }
     
     func requestBiometricAuthorization() {
@@ -51,13 +68,15 @@ class InteractorSignIn: SignInteractorInput {
                 guard let verificationID = verificationID else { return }
                 self?.outPut?.successVerification(verificationID: verificationID, numberPhone: phoneString, typeAuthorization: .sigIn)
                 print(phoneString)
+                
             }
         }
     }
     
-    func requestFullNumber(phone: String) {
+    func requestFullNumber(phone: String, country: CountryType) {
         fPNService.fpnTextFildd.text = phone
-        fPNService.fpnTextFildd.didEditText()
+        let fpnCountry = fPNService.fpnTextFildd.countryRepository.countries.first(where: { $0.name == country.name } )
+        fPNService.fpnTextFildd.selectedCountry = fpnCountry
     }
     
     func showListController() {
@@ -65,16 +84,9 @@ class InteractorSignIn: SignInteractorInput {
         outPut?.showListController(listController: list)
     }
     
-    func transferData() {
-        let country = fPNService.fpnTextFildd.countryRepository.countries
-        outPut?.transferData(data: country)
-        
-        let biometricImage = authorizationService.biometryImage
-        outPut?.setBiometricImage(image: biometricImage)
-    }
-    
-    func convertContryToPhoneNumber(_ country: FPNCountry) {
-        fPNService.fpnTextFildd.setFlag(countryCode: country.code)
+    func convertContryToPhoneNumber(_ country: CountryType) {
+        guard let fpnCode = FPNCountryCode(rawValue: country.code) else { return }
+        fPNService.fpnTextFildd.setFlag(countryCode: fpnCode)
         
         guard let typePhone = fPNService.fpnTextFildd.placeholder else { return }
         outPut?.sendTypePhone(typePhone)

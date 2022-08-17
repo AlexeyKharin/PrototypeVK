@@ -1,12 +1,11 @@
 
 import Foundation
-import FlagPhoneNumber
 
 protocol LogInPresenterProtocol {
     
     func doubleTap()
-    func configureDate()
-    func getPhoneCodeExample(country: FPNCountry)
-    func requestFullPhoneNumber(number: String)
+    func getPhoneCodeExample(country: CountryType)
+    func requestFullPhoneNumber(number: String, country: CountryType)
     func verificationOfPhoneNumber()
+    func confugureArray() -> [CountryType]?
 }

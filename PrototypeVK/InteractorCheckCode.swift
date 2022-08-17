@@ -8,14 +8,14 @@ protocol CheckCodeInteractorInput {
     func attemptCheckCode(withVerificationID: String, verificationCode: String)
 }
 
-protocol CheckCodeInteractorOutput {
+protocol CheckCodeInteractorOutput: AnyObject {
     func errorAthorization(description tittle: String)
     func succesAuthorization()
 }
 
 class InteractorCheckCode: CheckCodeInteractorInput {
     
-    var outPut: CheckCodeInteractorOutput?
+    weak var outPut: CheckCodeInteractorOutput?
     
     func attemptCheckCode(withVerificationID: String, verificationCode: String) {
         

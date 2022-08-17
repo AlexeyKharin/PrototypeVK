@@ -1,16 +1,21 @@
 
 import UIKit
-import Firebase
-import FirebaseAuth
-import FlagPhoneNumber
 import SnapKit
 
 class SignInViewController: UIViewController {
     
-    var arrayCountries: [FPNCountry]?
+    var arrayOfCountries: [CountryType]?
     var presenter: SignInPresenterProtocol?
     let configurator: ConfiguratorSignIn = ConfiguratorSignIn()
-            
+    
+    var currentRow: Int = 0 {
+        didSet {
+            modelCountry = arrayOfCountries?[currentRow]
+        }
+    }
+    
+    var modelCountry: CountryType?
+    
     private lazy var buttonAuthorization: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
@@ -107,7 +112,7 @@ class SignInViewController: UIViewController {
     @objc
     func validNumber() {
         guard let phoneNumber = phoneNumber.text else { return }
-        presenter?.requestFullPhoneNumber(number: phoneNumber)
+        presenter?.requestFullPhoneNumber(number: phoneNumber, country: modelCountry!)
         
     }
     
@@ -118,7 +123,9 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear (_ animated: Bool) {
         super.viewWillAppear(true)
-        presenter?.configureDate()
+
+        guard let arrayOfCountries = presenter?.confugureArray() else { return }
+        self.arrayOfCountries = arrayOfCountries
         selectComponentInPickerView(row: 0)
     }
     
@@ -145,7 +152,7 @@ class SignInViewController: UIViewController {
         
         pickerView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(12)
-            make.left.equalTo(descriptionLabel.snp.left).offset(-40)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(75)
             make.width.equalTo(120)
             make.height.equalTo(120)
         }
@@ -177,7 +184,7 @@ extension SignInViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int { return 1 }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return arrayCountries?.count ?? 0
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { return arrayOfCountries?.count ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -185,17 +192,19 @@ extension SignInViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 130.0
+        return 200.0
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let model = arrayCountries?[row]
+        let model = arrayOfCountries?[row]
+        currentRow = row
         return PhoneNumberView.create(icon: model?.flag ?? UIImage(), title: model!.phoneCode)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let arrayCountries = arrayCountries else { return }
+        guard let arrayCountries = arrayOfCountries else { return }
         let country = arrayCountries[row]
+        phoneNumber.text = ""
         presenter?.getPhoneCodeExample(country: country)
     }
 }
@@ -222,13 +231,9 @@ extension SignInViewController: SignInViewProtocol {
     
     func selectComponentInPickerView(row: Int) {
         pickerView.selectRow(row, inComponent: 0, animated: true)
-        
-        guard let country = arrayCountries?[row] else { return }
+        currentRow = row
+        guard let country = arrayOfCountries?[row] else { return }
         presenter?.getPhoneCodeExample(country: country)
-    }
-    
-    func generateCountries(_ countries: [FPNCountry]) {
-        arrayCountries = countries
     }
     
     func upDatePlaceHolder(typePhone: String) {
@@ -239,3 +244,4 @@ extension SignInViewController: SignInViewProtocol {
         buttonAuthorization.setImage(image.applyingSymbolConfiguration(.init(scale: .large))!.withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
     }
 }
+

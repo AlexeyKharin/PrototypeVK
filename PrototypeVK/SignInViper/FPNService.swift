@@ -15,7 +15,6 @@ class FPNService: NSObject, UITextFieldDelegate {
     
     lazy var fpnTextFildd: FPNTextField = {
         let fpnTextFildd = FPNTextField()
-        fpnTextFildd.delegate = self
         fpnTextFildd.displayMode = .list
         return fpnTextFildd
     }()
@@ -45,7 +44,6 @@ extension FPNService: FPNTextFieldDelegate {
     
     func fpnDidValidatePhoneNumber(textField: FPNTextField, isValid: Bool) {
         print(textField.text)
-        print(textField.phoneCodeTextField.text)
         closureValidation?(isValid)
     }
     

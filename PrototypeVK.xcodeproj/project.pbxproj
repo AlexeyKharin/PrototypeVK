@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		79F566026E9676B4344E34C4 /* Pods_PrototypeVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */; };
+		0DC2557DE18348DBEFFA1951 /* Pods_PrototypeVK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F48D1F7CDC92ECD5EA7A2E /* Pods_PrototypeVK.framework */; };
 		B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3F6285616770079C09A /* TypeAuthorization.swift */; };
 		B437D3F92857A2BD0079C09A /* OffsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3F82857A2BD0079C09A /* OffsetTextField.swift */; };
 		B437D3FC2857A7B20079C09A /* PresenterSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437D3FB2857A7B20079C09A /* PresenterSignIn.swift */; };
@@ -52,11 +52,17 @@
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
+		B4B14F6928AAA6E800BC355F /* CountryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F6828AAA6E800BC355F /* CountryType.swift */; };
+		B4B14F7028AC392C00BC355F /* PresenterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F6F28AC392C00BC355F /* PresenterAuth.swift */; };
+		B4B14F7228AC393F00BC355F /* RouterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7128AC393F00BC355F /* RouterAuth.swift */; };
+		B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7328AC398600BC355F /* AuthRouterProtocol.swift */; };
+		B4B14F7628AC3A5A00BC355F /* AuthPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7528AC3A5A00BC355F /* AuthPresenterProtocol.swift */; };
+		B4B14F7928AC3C7100BC355F /* ConfiguratorAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PrototypeVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A503CF6E72C8060F8D17CC8 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
+		02F48D1F7CDC92ECD5EA7A2E /* Pods_PrototypeVK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PrototypeVK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E381613403C864E5CE57F1A /* Pods-PrototypeVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.release.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.release.xcconfig"; sourceTree = "<group>"; };
 		B437D3F6285616770079C09A /* TypeAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAuthorization.swift; sourceTree = "<group>"; };
 		B437D3F82857A2BD0079C09A /* OffsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetTextField.swift; sourceTree = "<group>"; };
 		B437D3FB2857A7B20079C09A /* PresenterSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterSignIn.swift; sourceTree = "<group>"; };
@@ -102,7 +108,13 @@
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
-		E968E501173D69F3928EDB30 /* Pods-PrototypeVK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.release.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.release.xcconfig"; sourceTree = "<group>"; };
+		B4B14F6828AAA6E800BC355F /* CountryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryType.swift; sourceTree = "<group>"; };
+		B4B14F6F28AC392C00BC355F /* PresenterAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterAuth.swift; sourceTree = "<group>"; };
+		B4B14F7128AC393F00BC355F /* RouterAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterAuth.swift; sourceTree = "<group>"; };
+		B4B14F7328AC398600BC355F /* AuthRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouterProtocol.swift; sourceTree = "<group>"; };
+		B4B14F7528AC3A5A00BC355F /* AuthPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenterProtocol.swift; sourceTree = "<group>"; };
+		B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorAuth.swift; sourceTree = "<group>"; };
+		FD881D356E44B3578A172706 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,18 +122,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F566026E9676B4344E34C4 /* Pods_PrototypeVK.framework in Frameworks */,
 				B4478D51283A92B500A4CDFB /* iOSIntPackage in Frameworks */,
+				0DC2557DE18348DBEFFA1951 /* Pods_PrototypeVK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7A44E40C9C9AD951561BF531 /* Frameworks */ = {
+		9A8C2502015F1436251B14B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				17955C9B801802F0CA32A217 /* Pods_PrototypeVK.framework */,
+				02F48D1F7CDC92ECD5EA7A2E /* Pods_PrototypeVK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -129,8 +141,8 @@
 		A43ACAEFD16EFCEBC22FCA08 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3A503CF6E72C8060F8D17CC8 /* Pods-PrototypeVK.debug.xcconfig */,
-				E968E501173D69F3928EDB30 /* Pods-PrototypeVK.release.xcconfig */,
+				FD881D356E44B3578A172706 /* Pods-PrototypeVK.debug.xcconfig */,
+				3E381613403C864E5CE57F1A /* Pods-PrototypeVK.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -151,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B10C3228424A190027C168 /* SignInViewController.swift */,
+				B4B14F6828AAA6E800BC355F /* CountryType.swift */,
 				B437D418285F9F380079C09A /* SignInViewProtocol.swift */,
 			);
 			name = SignInView;
@@ -180,6 +193,7 @@
 				B437D3FF2857A7E50079C09A /* InteractorSignIn.swift */,
 				B437D414285A75090079C09A /* SignInteractorInput.swift */,
 				B437D412285A74EB0079C09A /* SignInInteractorOutput.swift */,
+				B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */,
 			);
 			path = SignInInteractor;
 			sourceTree = "<group>";
@@ -308,7 +322,7 @@
 				B456896728311CB1007FA9F5 /* PrototypeVK */,
 				B456896628311CB1007FA9F5 /* Products */,
 				A43ACAEFD16EFCEBC22FCA08 /* Pods */,
-				7A44E40C9C9AD951561BF531 /* Frameworks */,
+				9A8C2502015F1436251B14B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,16 +374,60 @@
 			children = (
 				B456897C28312A2C007FA9F5 /* GoogleService-Info.plist */,
 				B49C7845285262AB00D9FFB1 /* Localazation */,
+				B4B14F6A28AC33EA00BC355F /* AuthViper */,
 				B437D3FA2857A77E0079C09A /* SignInViper */,
 				B437D41A285FB1C90079C09A /* LogInViper */,
 				B437D4382860D9180079C09A /* CheckCodeViper */,
 				B437D3F6285616770079C09A /* TypeAuthorization.swift */,
 				B437D3F82857A2BD0079C09A /* OffsetTextField.swift */,
-				B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */,
 				B492CDE2283C08E000EF2DD2 /* PhoneNumberView.swift */,
-				B49C783E2845308A00D9FFB1 /* LocalAuthorizationService.swift */,
 			);
 			name = Authorization;
+			sourceTree = "<group>";
+		};
+		B4B14F6A28AC33EA00BC355F /* AuthViper */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F7728AC3C4900BC355F /* AuthConfigurator */,
+				B4B14F6B28AC341C00BC355F /* AuthView */,
+				B4B14F6D28AC347D00BC355F /* AuthPresenter */,
+				B4B14F6E28AC38F000BC355F /* AuthRouter */,
+			);
+			name = AuthViper;
+			sourceTree = "<group>";
+		};
+		B4B14F6B28AC341C00BC355F /* AuthView */ = {
+			isa = PBXGroup;
+			children = (
+				B4478D4B283A6A4100A4CDFB /* AuthViewController.swift */,
+			);
+			name = AuthView;
+			sourceTree = "<group>";
+		};
+		B4B14F6D28AC347D00BC355F /* AuthPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F6F28AC392C00BC355F /* PresenterAuth.swift */,
+				B4B14F7528AC3A5A00BC355F /* AuthPresenterProtocol.swift */,
+			);
+			name = AuthPresenter;
+			sourceTree = "<group>";
+		};
+		B4B14F6E28AC38F000BC355F /* AuthRouter */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F7128AC393F00BC355F /* RouterAuth.swift */,
+				B4B14F7328AC398600BC355F /* AuthRouterProtocol.swift */,
+			);
+			name = AuthRouter;
+			sourceTree = "<group>";
+		};
+		B4B14F7728AC3C4900BC355F /* AuthConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */,
+			);
+			name = AuthConfigurator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,11 +437,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B456897928311CB6007FA9F5 /* Build configuration list for PBXNativeTarget "PrototypeVK" */;
 			buildPhases = (
-				AB77D599B6C7ADEC132F5258 /* [CP] Check Pods Manifest.lock */,
+				A4DF155842CF4235C9F75766 /* [CP] Check Pods Manifest.lock */,
 				B456896128311CB1007FA9F5 /* Sources */,
 				B456896228311CB1007FA9F5 /* Frameworks */,
 				B456896328311CB1007FA9F5 /* Resources */,
-				067DCDD5953638589F5704FA /* [CP] Embed Pods Frameworks */,
+				55B8A7A6FF0487235325148B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -451,7 +509,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		067DCDD5953638589F5704FA /* [CP] Embed Pods Frameworks */ = {
+		55B8A7A6FF0487235325148B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -468,7 +526,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AB77D599B6C7ADEC132F5258 /* [CP] Check Pods Manifest.lock */ = {
+		A4DF155842CF4235C9F75766 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -501,15 +559,18 @@
 				B437D40F2858FAF70079C09A /* FPNService.swift in Sources */,
 				B437D419285F9F390079C09A /* SignInViewProtocol.swift in Sources */,
 				B49C783F2845308A00D9FFB1 /* LocalAuthorizationService.swift in Sources */,
+				B4B14F6928AAA6E800BC355F /* CountryType.swift in Sources */,
 				B437D4402860DB550079C09A /* PresenterCheckCode.swift in Sources */,
 				B437D415285A75090079C09A /* SignInteractorInput.swift in Sources */,
 				B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */,
 				B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */,
 				B437D42F285FB4DF0079C09A /* LogInPresenterProtocol .swift in Sources */,
+				B4B14F7928AC3C7100BC355F /* ConfiguratorAuth.swift in Sources */,
 				B492CDE3283C08E000EF2DD2 /* PhoneNumberView.swift in Sources */,
 				B437D4442860DB750079C09A /* ConfiguratorCheckCode.swift in Sources */,
 				B4478D4C283A6A4100A4CDFB /* AuthViewController.swift in Sources */,
 				B437D429285FB3CF0079C09A /* ConfiguratorLogIn.swift in Sources */,
+				B4B14F7628AC3A5A00BC355F /* AuthPresenterProtocol.swift in Sources */,
 				B437D3FE2857A7D00079C09A /* RouterSignIn.swift in Sources */,
 				B49C784228467BE700D9FFB1 /* BlackMode.swift in Sources */,
 				B437D4002857A7E50079C09A /* InteractorSignIn.swift in Sources */,
@@ -517,6 +578,7 @@
 				B456896D28311CB1007FA9F5 /* ViewController.swift in Sources */,
 				B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */,
 				B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */,
+				B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */,
 				B437D4422860DB640079C09A /* InteractorCheckCode.swift in Sources */,
 				B437D427285FB3C10079C09A /* InteractorLogIn.swift in Sources */,
 				B4478D4E283A6E5500A4CDFB /* Images.swift in Sources */,
@@ -526,6 +588,7 @@
 				B456896928311CB1007FA9F5 /* AppDelegate.swift in Sources */,
 				B437D42D285FB49B0079C09A /* LogInViewProtocol.swift in Sources */,
 				B437D431285FB5120079C09A /* LogInInteractorInput.swift in Sources */,
+				B4B14F7228AC393F00BC355F /* RouterAuth.swift in Sources */,
 				B437D4462860DB810079C09A /* RouterCheckCode.swift in Sources */,
 				B437D40D2857BCE70079C09A /* SignInRouterProtocol.swift in Sources */,
 				B437D3F92857A2BD0079C09A /* OffsetTextField.swift in Sources */,
@@ -534,6 +597,7 @@
 				B437D4022857A8BF0079C09A /* ConfiguratorSignIn.swift in Sources */,
 				B437D417285A75AC0079C09A /* SignInPresenterProtocol.swift in Sources */,
 				B456896B28311CB1007FA9F5 /* SceneDelegate.swift in Sources */,
+				B4B14F7028AC392C00BC355F /* PresenterAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +755,7 @@
 		};
 		B456897A28311CB6007FA9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A503CF6E72C8060F8D17CC8 /* Pods-PrototypeVK.debug.xcconfig */;
+			baseConfigurationReference = FD881D356E44B3578A172706 /* Pods-PrototypeVK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -721,7 +785,7 @@
 		};
 		B456897B28311CB6007FA9F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E968E501173D69F3928EDB30 /* Pods-PrototypeVK.release.xcconfig */;
+			baseConfigurationReference = 3E381613403C864E5CE57F1A /* Pods-PrototypeVK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
