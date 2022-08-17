@@ -6,13 +6,19 @@ class PresenterSignIn {
     
     var router: RouterSignIn?
     
-    var view: SignInViewProtocol?
+    weak var view: SignInViewProtocol?
     
     var interactor: SignInteractorInput?
     
 }
 
 extension PresenterSignIn: SignInPresenterProtocol {
+    
+    func confugureArray() -> [CountryType]? {
+        
+        return interactor?.prepareArrayOfCountries()
+    }
+    
     
     func attemptBiometricAuthorization() {
         interactor?.requestBiometricAuthorization()
@@ -22,21 +28,18 @@ extension PresenterSignIn: SignInPresenterProtocol {
         interactor?.verification()
     }
     
-    func requestFullPhoneNumber(number: String) {
-        interactor?.requestFullNumber(phone: number)
+    func requestFullPhoneNumber(number: String, country: CountryType) {
+        interactor?.requestFullNumber(phone: number, country: country)
     }
     
     func doubleTap() {
         interactor?.showListController()
     }
     
-    func configureDate() {
-        interactor?.transferData()
-    }
-    
-    func getPhoneCodeExample(country: FPNCountry) {
+    func getPhoneCodeExample(country: CountryType) {
         interactor?.convertContryToPhoneNumber(country)
     }
+    
 }
 
 extension PresenterSignIn: SignInInteractorOutput {
@@ -51,16 +54,14 @@ extension PresenterSignIn: SignInInteractorOutput {
         
     }
     
-    func transferData(data: [FPNCountry]) {
-        view?.generateCountries(data)
-    }
-    
     func sendTypePhone(_ phone: String) {
         view?.upDatePlaceHolder(typePhone: phone)
+        
     }
     
     func transferIndex(_ index: Int) {
         view?.selectComponentInPickerView(row: index)
+        
     }
     
     func successVerification(verificationID: String, numberPhone: String, typeAuthorization: TypeAuthorization) {

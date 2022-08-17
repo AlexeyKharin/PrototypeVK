@@ -6,32 +6,32 @@ class PresenterLogIn {
     
     var router: LogInRouterProtocol?
     
-    var view: LogInViewProtocol?
+    weak var view: LogInViewProtocol?
     
     var interactor: LogInInteractorInput?
     
 }
 
 extension PresenterLogIn: LogInPresenterProtocol {
+    func confugureArray() -> [CountryType]? {
         
-    func verificationOfPhoneNumber() {
-        interactor?.verification()
+        return interactor?.prepareArrayOfCountries()
     }
     
-    func requestFullPhoneNumber(number: String) {
-        interactor?.requestFullNumber(phone: number)
+    func requestFullPhoneNumber(number: String, country: CountryType) {
+        interactor?.requestFullNumber(phone: number, country: country)
     }
     
     func doubleTap() {
         interactor?.showListController()
     }
     
-    func configureDate() {
-        interactor?.transferData()
+    func getPhoneCodeExample(country: CountryType) {
+        interactor?.convertContryToPhoneNumber(country)
     }
     
-    func getPhoneCodeExample(country: FPNCountry) {
-        interactor?.convertContryToPhoneNumber(country)
+    func verificationOfPhoneNumber() {
+        interactor?.verification()
     }
 }
 
@@ -46,11 +46,7 @@ extension PresenterLogIn: LogInInteractorOutput {
         router?.showListController(list: list)
         
     }
-    
-    func transferData(data: [FPNCountry]) {
-        view?.generateCountries(data)
-    }
-    
+
     func sendTypePhone(_ phone: String) {
         view?.upDatePlaceHolder(typePhone: phone)
     }

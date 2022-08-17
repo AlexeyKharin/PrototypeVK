@@ -9,7 +9,7 @@ protocol CheckCodeRouterProtocol {
 
 class RouterCheckCode: CheckCodeRouterProtocol {
     
-    var view: UIViewController?
+    weak var view: UIViewController?
     
     func succesAuthorization() {
         let vc = ViewController()

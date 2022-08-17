@@ -5,7 +5,7 @@ import FlagPhoneNumber
 
 class RouterSignIn: SignInRouterProtocol {
     
-    var view: UIViewController?
+    weak var view: UIViewController?
     
     func successVerification(verificationID: String, numberPhone: String, typeAuthorization: TypeAuthorization) {
         let vc = CheckCodeViewController(numberPhone: numberPhone, verificationID: verificationID, typeAuthorization: typeAuthorization)

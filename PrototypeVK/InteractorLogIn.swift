@@ -6,7 +6,7 @@ import FirebaseAuth
 
 class InteractorLogIn: LogInInteractorInput {
     
-    var outPut: LogInInteractorOutput?
+    weak var outPut: LogInInteractorOutput?
     
     var fPNService: FPNService = FPNService()
     
@@ -20,6 +20,20 @@ class InteractorLogIn: LogInInteractorInput {
         }
     }
     
+    
+    func prepareArrayOfCountries() -> [CountryType]? {
+        
+        let countries = fPNService.fpnTextFildd.countryRepository.countries.map { CountryType(
+            name: $0.name,
+            phoneCode: $0.phoneCode,
+            flag: UIImage(named: $0.code.rawValue, in: Bundle.FlagIcons, compatibleWith: nil),
+            code: $0.code.rawValue )
+        }
+        
+        return countries
+        
+    }
+    
     func verification() {
         guard let phoneString = fPNService.fpnTextFildd.getFormattedPhoneNumber(format: .International) else { return }
         
@@ -29,15 +43,17 @@ class InteractorLogIn: LogInInteractorInput {
                 
             } else {
                 guard let verificationID = verificationID else { return }
-                self?.outPut?.successVerification(verificationID: verificationID, numberPhone: phoneString, typeAuthorization: .logIn)
+                self?.outPut?.successVerification(verificationID: verificationID, numberPhone: phoneString, typeAuthorization: .sigIn)
                 print(phoneString)
+                
             }
         }
     }
     
-    func requestFullNumber(phone: String) {
+    func requestFullNumber(phone: String, country: CountryType) {
         fPNService.fpnTextFildd.text = phone
-        fPNService.fpnTextFildd.didEditText()
+        let fpnCountry = fPNService.fpnTextFildd.countryRepository.countries.first(where: { $0.name == country.name } )
+        fPNService.fpnTextFildd.selectedCountry = fpnCountry
     }
     
     func showListController() {
@@ -45,17 +61,11 @@ class InteractorLogIn: LogInInteractorInput {
         outPut?.showListController(listController: list)
     }
     
-    func transferData() {
-        let country = fPNService.fpnTextFildd.countryRepository.countries
-        outPut?.transferData(data: country)
-    }
-    
-    func convertContryToPhoneNumber(_ country: FPNCountry) {
-        fPNService.fpnTextFildd.setFlag(countryCode: country.code)
+    func convertContryToPhoneNumber(_ country: CountryType) {
+        guard let fpnCode = FPNCountryCode(rawValue: country.code) else { return }
+        fPNService.fpnTextFildd.setFlag(countryCode: fpnCode)
         
         guard let typePhone = fPNService.fpnTextFildd.placeholder else { return }
         outPut?.sendTypePhone(typePhone)
     }
 }
-
-

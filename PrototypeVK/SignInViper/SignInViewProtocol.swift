@@ -2,8 +2,7 @@
 import Foundation
 import FlagPhoneNumber
 
-protocol SignInViewProtocol {
-    func generateCountries(_ countries: [FPNCountry])
+protocol SignInViewProtocol: AnyObject {
     func upDatePlaceHolder(typePhone: String)
     func selectComponentInPickerView(row: Int)
     func validationPhoneNumber(isValid: Bool)

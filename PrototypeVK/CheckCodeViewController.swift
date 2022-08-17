@@ -2,15 +2,19 @@
 import UIKit
 import Firebase
 import FirebaseAuth
-//import FlagPhoneNumber
+
 import SnapKit
 
 class CheckCodeViewController: UIViewController {
     
     private var numberPhone: String
+    
     private var typeAuthorization: TypeAuthorization
+    
     private var verificationID: String
+    
     var presenter: PresenterCheckCode?
+    
     var configurator: ConfiguratorCheckCode = ConfiguratorCheckCode()
     
     init(numberPhone: String, verificationID: String, typeAuthorization: TypeAuthorization) {
@@ -109,21 +113,7 @@ class CheckCodeViewController: UIViewController {
     func authorizationPhoneNumber() {
         guard let codeValidVC = codeVCTextField.text else { return }
         presenter?.checkVerificationCode(withVerificationID: verificationID, verificationCode: codeValidVC)
-//        
-//        let credetional = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: codeValidVC)
-//
-//        Auth.auth().signIn(with: credetional) { (_, error) in
-//            if error != nil {
-//                let ac = UIAlertController(title: error?.localizedDescription, message: nil, preferredStyle: .alert)
-//                let cancel = UIAlertAction(title: "Отмена", style: .cancel)
-//                ac.addAction(cancel)
-//                self.present(ac, animated: true)
-//
-//            } else {
-//                let vc = ViewController()
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            }
-//        }
+
     }
     
     private let imageConfirmation: UIImageView = {

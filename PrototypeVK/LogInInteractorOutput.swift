@@ -2,10 +2,9 @@
 import Foundation
 import FlagPhoneNumber
 
-protocol LogInInteractorOutput {
+protocol LogInInteractorOutput: AnyObject {
     
     func showListController(listController: FPNCountryListViewController)
-    func transferData(data: [FPNCountry])
     func sendTypePhone(_ phone: String)
     func transferIndex(_ index: Int)
     func validation(isValid: Bool)
