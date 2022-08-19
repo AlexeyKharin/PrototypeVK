@@ -12,7 +12,7 @@ class RouterCheckCode: CheckCodeRouterProtocol {
     weak var view: UIViewController?
     
     func succesAuthorization() {
-        let vc = ViewController()
+        let vc = TopicsViewController()
         view?.navigationController?.pushViewController(vc, animated: true)
     }
     

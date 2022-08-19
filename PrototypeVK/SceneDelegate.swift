@@ -10,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let authCOntroller = AuthViewController()
+        let authCOntroller = TopicsViewController()
 //        let authCOntroller = CheckCodeViewController(numberPhone: "+375296534897", verificationID: "", typeAuthorization: .logIn)
         let navigation = UINavigationController(rootViewController: authCOntroller)
         window?.rootViewController = navigation
