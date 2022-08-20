@@ -49,6 +49,7 @@
 		B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C7843284680CF00D9FFB1 /* CustomColors.swift */; };
 		B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C78482852658200D9FFB1 /* infoAuth.strings */; };
 		B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C784B28526A2B00D9FFB1 /* Localizable.strings */; };
+		B4A746B328AFB23A00DF2382 /* PhotosResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A746B228AFB23A00DF2382 /* PhotosResult.swift */; };
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
@@ -58,6 +59,13 @@
 		B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7328AC398600BC355F /* AuthRouterProtocol.swift */; };
 		B4B14F7628AC3A5A00BC355F /* AuthPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7528AC3A5A00BC355F /* AuthPresenterProtocol.swift */; };
 		B4B14F7928AC3C7100BC355F /* ConfiguratorAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */; };
+		B4B14F7C28AD7A2800BC355F /* ApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7B28AD7A2800BC355F /* ApiType.swift */; };
+		B4B14F7E28AD834900BC355F /* NetWorkMamager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7D28AD834800BC355F /* NetWorkMamager.swift */; };
+		B4B14F8028AD84EF00BC355F /* TopicResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7F28AD84EF00BC355F /* TopicResult.swift */; };
+		B4B14F8328AE2AE600BC355F /* TopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */; };
+		B4C0503C28AE326100F4F834 /* TopicCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */; };
+		B4C0503E28AE344500F4F834 /* TopicCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */; };
+		B4C0504028AE746300F4F834 /* PhotoPopularCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +113,7 @@
 		B49C7843284680CF00D9FFB1 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B49C78492852658300D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/infoAuth.strings; sourceTree = "<group>"; };
 		B49C784C28526A2B00D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4A746B228AFB23A00DF2382 /* PhotosResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResult.swift; sourceTree = "<group>"; };
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +123,13 @@
 		B4B14F7328AC398600BC355F /* AuthRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouterProtocol.swift; sourceTree = "<group>"; };
 		B4B14F7528AC3A5A00BC355F /* AuthPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenterProtocol.swift; sourceTree = "<group>"; };
 		B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguratorAuth.swift; sourceTree = "<group>"; };
+		B4B14F7B28AD7A2800BC355F /* ApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiType.swift; sourceTree = "<group>"; };
+		B4B14F7D28AD834800BC355F /* NetWorkMamager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkMamager.swift; sourceTree = "<group>"; };
+		B4B14F7F28AD84EF00BC355F /* TopicResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResult.swift; sourceTree = "<group>"; };
+		B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
+		B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionCell.swift; sourceTree = "<group>"; };
+		B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionLayout.swift; sourceTree = "<group>"; };
+		B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPopularCollectionCell.swift; sourceTree = "<group>"; };
 		FD881D356E44B3578A172706 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -340,9 +356,11 @@
 				B456896828311CB1007FA9F5 /* AppDelegate.swift */,
 				B456896A28311CB1007FA9F5 /* SceneDelegate.swift */,
 				B456896C28311CB1007FA9F5 /* ViewController.swift */,
+				B4B14F8128AE2AB700BC355F /* Topics */,
 				B49C784028467B2500D9FFB1 /* ColorMode */,
 				B4B10C3828424E0B0027C168 /* Authorization */,
 				B4478D4D283A6E5500A4CDFB /* Images.swift */,
+				B4B14F7A28AD7A0100BC355F /* API */,
 				B456896E28311CB1007FA9F5 /* Main.storyboard */,
 				B456897128311CB6007FA9F5 /* Assets.xcassets */,
 				B456897328311CB6007FA9F5 /* LaunchScreen.storyboard */,
@@ -428,6 +446,28 @@
 				B4B14F7828AC3C7100BC355F /* ConfiguratorAuth.swift */,
 			);
 			name = AuthConfigurator;
+			sourceTree = "<group>";
+		};
+		B4B14F7A28AD7A0100BC355F /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F7B28AD7A2800BC355F /* ApiType.swift */,
+				B4B14F7D28AD834800BC355F /* NetWorkMamager.swift */,
+				B4B14F7F28AD84EF00BC355F /* TopicResult.swift */,
+				B4A746B228AFB23A00DF2382 /* PhotosResult.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B4B14F8128AE2AB700BC355F /* Topics */ = {
+			isa = PBXGroup;
+			children = (
+				B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */,
+				B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */,
+				B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */,
+				B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */,
+			);
+			path = Topics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,15 +608,21 @@
 				B4B14F7928AC3C7100BC355F /* ConfiguratorAuth.swift in Sources */,
 				B492CDE3283C08E000EF2DD2 /* PhoneNumberView.swift in Sources */,
 				B437D4442860DB750079C09A /* ConfiguratorCheckCode.swift in Sources */,
+				B4B14F7E28AD834900BC355F /* NetWorkMamager.swift in Sources */,
 				B4478D4C283A6A4100A4CDFB /* AuthViewController.swift in Sources */,
+				B4C0503C28AE326100F4F834 /* TopicCollectionCell.swift in Sources */,
+				B4C0503E28AE344500F4F834 /* TopicCollectionLayout.swift in Sources */,
 				B437D429285FB3CF0079C09A /* ConfiguratorLogIn.swift in Sources */,
 				B4B14F7628AC3A5A00BC355F /* AuthPresenterProtocol.swift in Sources */,
+				B4B14F7C28AD7A2800BC355F /* ApiType.swift in Sources */,
 				B437D3FE2857A7D00079C09A /* RouterSignIn.swift in Sources */,
 				B49C784228467BE700D9FFB1 /* BlackMode.swift in Sources */,
+				B4C0504028AE746300F4F834 /* PhotoPopularCollectionCell.swift in Sources */,
 				B437D4002857A7E50079C09A /* InteractorSignIn.swift in Sources */,
 				B437D435285FB5D30079C09A /* LogInRouterProtocol.swift in Sources */,
 				B456896D28311CB1007FA9F5 /* ViewController.swift in Sources */,
 				B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */,
+				B4A746B328AFB23A00DF2382 /* PhotosResult.swift in Sources */,
 				B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */,
 				B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */,
 				B437D4422860DB640079C09A /* InteractorCheckCode.swift in Sources */,
@@ -587,6 +633,7 @@
 				B437D3F7285616770079C09A /* TypeAuthorization.swift in Sources */,
 				B456896928311CB1007FA9F5 /* AppDelegate.swift in Sources */,
 				B437D42D285FB49B0079C09A /* LogInViewProtocol.swift in Sources */,
+				B4B14F8028AD84EF00BC355F /* TopicResult.swift in Sources */,
 				B437D431285FB5120079C09A /* LogInInteractorInput.swift in Sources */,
 				B4B14F7228AC393F00BC355F /* RouterAuth.swift in Sources */,
 				B437D4462860DB810079C09A /* RouterCheckCode.swift in Sources */,
@@ -596,6 +643,7 @@
 				B437D413285A74EB0079C09A /* SignInInteractorOutput.swift in Sources */,
 				B437D4022857A8BF0079C09A /* ConfiguratorSignIn.swift in Sources */,
 				B437D417285A75AC0079C09A /* SignInPresenterProtocol.swift in Sources */,
+				B4B14F8328AE2AE600BC355F /* TopicsViewController.swift in Sources */,
 				B456896B28311CB1007FA9F5 /* SceneDelegate.swift in Sources */,
 				B4B14F7028AC392C00BC355F /* PresenterAuth.swift in Sources */,
 			);

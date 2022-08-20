@@ -99,12 +99,16 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - SDWebImage (5.13.2):
+    - SDWebImage/Core (= 5.13.2)
+  - SDWebImage/Core (5.13.2)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Firebase
   - Firebase/Auth
   - FlagPhoneNumber
+  - SDWebImage (~> 5.0)
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
@@ -122,6 +126,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - nanopb
     - PromisesObjC
+    - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -138,8 +143,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: dedeb94536212913e2fd23c5a62328c5f7600865
+PODFILE CHECKSUM: 34cee0bf8ab1c83351cfe4bdaa18e8b96950a52b
 
 COCOAPODS: 1.11.3
