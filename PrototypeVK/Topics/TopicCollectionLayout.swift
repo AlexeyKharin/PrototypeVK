@@ -85,6 +85,7 @@ extension TopicCollectionLayout {
                 
                 if let cell = collectionView?.cellForItem(at: indexPath) as? PhotoPopularCollectionCell {
                     cell.imageCoverView.alpha = 0.8
+                    cell.titleChooseCategory.transform = CGAffineTransform(scaleX: 0, y: 0)
                 }
                 
             } else if  indexPath.item == 0 && indexPath.item == featuredItemIndex {
@@ -94,6 +95,7 @@ extension TopicCollectionLayout {
                 
                 if let cell = collectionView?.cellForItem(at: indexPath) as? PhotoPopularCollectionCell {
                     cell.imageCoverView.alpha = 0.8 - ((1 - nextItemPercentageOffset) * (0.8 - 0.2))
+                    cell.titleChooseCategory.transform = CGAffineTransform(scaleX: (1 - nextItemPercentageOffset) , y: (1 - nextItemPercentageOffset))
                 }
             }
             

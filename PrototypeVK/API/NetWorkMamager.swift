@@ -24,7 +24,7 @@ class NetWorkMamager {
             }
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200  {
-//                print(httpResponse)
+                print(httpResponse.statusCode)
             }
             
             if let error = error {

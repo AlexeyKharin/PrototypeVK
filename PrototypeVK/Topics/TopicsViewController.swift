@@ -3,9 +3,9 @@ import UIKit
 import SnapKit
 
 class TopicsViewController: UIViewController {
-
+    
     var arrayTopics: [TopicResultElement] = []
-    var photoOfDay: UIImage = UIImage()
+    var photoOfDay: [PhotoElement] = []
     let layout: TopicCollectionLayout = TopicCollectionLayout()
     
     lazy var collectionView: UICollectionView = {
@@ -74,6 +74,30 @@ class TopicsViewController: UIViewController {
                 }
             }
         }
+        
+        let urlRequestPhoto = ApiType.getPopularPhoto.request
+        
+        NetWorkMamager.obtainData(request: urlRequestPhoto, type: PhotosResult.self) { (result) in
+            
+            switch result {
+            case .success(let posts):
+                self.photoOfDay = posts
+                self.collectionView.reloadData()
+                
+            case .failure(let error):
+                
+                switch error {
+                case .failedConnect:
+                    print("error failedConnect \(error.localizedDescription)")
+                    
+                case .failedDecodeData:
+                    print("error failedDecodeData")
+                    
+                case .failedGetGetData(debugDescription: let description):
+                    print("error failedGetGetData")
+                }
+            }
+        }
     }
 }
 
@@ -103,7 +127,7 @@ extension TopicsViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            cell.topicResultElement = arrayTopics.first
+            cell.photoResultElement = photoOfDay.first
             
             return cell
             
@@ -118,7 +142,6 @@ extension TopicsViewController: UICollectionViewDataSource {
             
             return cell
         }
-        
     }
 }
 
@@ -131,11 +154,32 @@ extension TopicsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let offset = layout.dragOffset * CGFloat(indexPath.item)
-        if collectionView.contentOffset.y != offset {
-            collectionView.setContentOffset(
-                CGPoint(x: 0, y: offset), animated: true)
+        switch indexPath.section {
+            
+        case 0:
+            let offset = layout.dragOffset * CGFloat(indexPath.item)
+            if collectionView.contentOffset.y != offset {
+                collectionView.setContentOffset(
+                    CGPoint(x: 0, y: offset), animated: true)
+            }
+            
+        default:
+            let offset = 100 + layout.dragOffset * CGFloat(indexPath.item)
+            if collectionView.contentOffset.y != offset {
+                collectionView.setContentOffset(
+                    CGPoint(x: 0, y: offset), animated: true)
+                if let cell = collectionView.cellForItem(at: indexPath) as? TopicCollectionCell {
+                    if cell.isSelected {
+                        print(cell.isSelected)
+                    }
+                }
+            }
+            
+            if collectionView.contentOffset.y == offset {
+                let vc = ViewController()
+                let navigation = UINavigationController(rootViewController: vc)
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
-        
     }
 }

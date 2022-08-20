@@ -42,7 +42,12 @@ class TopicCollectionCell: UICollectionViewCell {
         label.toAutoLayout()
         label.textAlignment = .center
         label.textColor = .white
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
+//        label.layer.shadowColor = UIColor.gray.cgColor
+//        label.layer.shadowRadius = 4
+//        label.layer.shadowOffset = CGSize(width: 5, height: 4)
+//        label.layer.shadowOpacity = 0.5
         return label
     }()
     
@@ -93,7 +98,7 @@ class TopicCollectionCell: UICollectionViewCell {
         imageCoverView.alpha = maxAlpha - (delta * (maxAlpha - minAlpha))
      
         
-        let scale = max(delta, 0.5)
+        let scale = max(delta, 0.38)
         titleTopicLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
         titleTopicLabel.alpha = 1 - ((1 - delta) * (maxAlpha - minAlpha))
     }

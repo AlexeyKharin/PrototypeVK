@@ -49,6 +49,7 @@
 		B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C7843284680CF00D9FFB1 /* CustomColors.swift */; };
 		B49C784A2852658300D9FFB1 /* infoAuth.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C78482852658200D9FFB1 /* infoAuth.strings */; };
 		B49C784D28526A2C00D9FFB1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49C784B28526A2B00D9FFB1 /* Localizable.strings */; };
+		B4A746B328AFB23A00DF2382 /* PhotosResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A746B228AFB23A00DF2382 /* PhotosResult.swift */; };
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
@@ -112,6 +113,7 @@
 		B49C7843284680CF00D9FFB1 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B49C78492852658300D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/infoAuth.strings; sourceTree = "<group>"; };
 		B49C784C28526A2B00D9FFB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4A746B228AFB23A00DF2382 /* PhotosResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResult.swift; sourceTree = "<group>"; };
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				B4B14F7B28AD7A2800BC355F /* ApiType.swift */,
 				B4B14F7D28AD834800BC355F /* NetWorkMamager.swift */,
 				B4B14F7F28AD84EF00BC355F /* TopicResult.swift */,
+				B4A746B228AFB23A00DF2382 /* PhotosResult.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -460,8 +463,8 @@
 			isa = PBXGroup;
 			children = (
 				B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */,
-				B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */,
 				B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */,
+				B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */,
 				B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */,
 			);
 			path = Topics;
@@ -619,6 +622,7 @@
 				B437D435285FB5D30079C09A /* LogInRouterProtocol.swift in Sources */,
 				B456896D28311CB1007FA9F5 /* ViewController.swift in Sources */,
 				B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */,
+				B4A746B328AFB23A00DF2382 /* PhotosResult.swift in Sources */,
 				B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */,
 				B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */,
 				B437D4422860DB640079C09A /* InteractorCheckCode.swift in Sources */,

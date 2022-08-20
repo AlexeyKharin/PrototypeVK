@@ -3,6 +3,7 @@ import Foundation
 
 enum ApiType {
     case getTopics
+    case getPopularPhoto
     
     var scheme: String {
         
@@ -12,7 +13,8 @@ enum ApiType {
     var host: String {
         switch self {
         case .getTopics:
-            
+            return "api.unsplash.com"
+        case .getPopularPhoto:
             return "api.unsplash.com"
         }
     }
@@ -21,8 +23,9 @@ enum ApiType {
         
         switch self {
         case .getTopics:
-            
             return "/topics"
+        case .getPopularPhoto:
+            return "/photos"
         }
     }
     
@@ -31,7 +34,11 @@ enum ApiType {
         switch self {
         case .getTopics:
             let headers = ["Authorization" : "Client-ID 6r9bfSd-DT-wyG6lz1eXb3zuo6zpv8dBvr6TUMLnc6Y",  "content-type": "application/json"]
-            
+    
+            return  headers
+        case .getPopularPhoto:
+            let headers = ["Authorization" : "Client-ID 6r9bfSd-DT-wyG6lz1eXb3zuo6zpv8dBvr6TUMLnc6Y",  "content-type": "application/json"]
+    
             return  headers
         }
     }
@@ -42,11 +49,20 @@ enum ApiType {
         case .getTopics:
             let inputQuery = [
                 "page": "1",
-                "per_page": "50",
+                "per_page": "60",
                 "lang": "ru"
             ]
-            
             return inputQuery
+            
+        case .getPopularPhoto:
+            
+                let inputQuery = [
+                    "page": "1",
+                    "per_page": "10",
+                    "order_by": "popular"
+                ]
+                
+                return inputQuery
         }
     }
     
