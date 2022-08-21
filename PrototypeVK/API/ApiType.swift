@@ -4,6 +4,7 @@ import Foundation
 enum ApiType {
     case getTopics
     case getPopularPhoto
+    case getPhotosOfTopic(topic: String)
     
     var scheme: String {
         
@@ -11,12 +12,8 @@ enum ApiType {
     }
     
     var host: String {
-        switch self {
-        case .getTopics:
-            return "api.unsplash.com"
-        case .getPopularPhoto:
-            return "api.unsplash.com"
-        }
+        
+        return "api.unsplash.com"
     }
     
     var path: String {
@@ -26,21 +23,17 @@ enum ApiType {
             return "/topics"
         case .getPopularPhoto:
             return "/photos"
+        case .getPhotosOfTopic (let topic):
+            return "/topics/\(topic)/photos"
         }
     }
     
     var headers: [String: String] {
         
-        switch self {
-        case .getTopics:
-            let headers = ["Authorization" : "Client-ID 6r9bfSd-DT-wyG6lz1eXb3zuo6zpv8dBvr6TUMLnc6Y",  "content-type": "application/json"]
-    
-            return  headers
-        case .getPopularPhoto:
-            let headers = ["Authorization" : "Client-ID 6r9bfSd-DT-wyG6lz1eXb3zuo6zpv8dBvr6TUMLnc6Y",  "content-type": "application/json"]
-    
-            return  headers
-        }
+        let headers = ["Authorization" : "Client-ID 6r9bfSd-DT-wyG6lz1eXb3zuo6zpv8dBvr6TUMLnc6Y",  "content-type": "application/json"]
+        
+        return  headers
+        
     }
     
     var inputQuery: [String: String] {
@@ -55,17 +48,29 @@ enum ApiType {
             return inputQuery
             
         case .getPopularPhoto:
+            let inputQuery = [
+                "page": "1",
+                "per_page": "10",
+                "order_by": "popular"
+            ]
             
-                let inputQuery = [
-                    "page": "1",
-                    "per_page": "10",
-                    "order_by": "popular"
-                ]
-                
-                return inputQuery
+            return inputQuery
+            
+        case .getPhotosOfTopic:
+            let inputQuery = [
+                "page": "1",
+                "per_page": "30",
+                "lang": "ru"
+            ]
+            
+            return inputQuery
         }
     }
     
+    var httpMethod: String {
+        let httpMethod = "get"
+        return httpMethod
+    }
     var url: URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = self.scheme
@@ -79,7 +84,7 @@ enum ApiType {
     var request: URLRequest {
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = self.headers
-        request.httpMethod = "get"
+        request.httpMethod = self.httpMethod
         
         return request
     }

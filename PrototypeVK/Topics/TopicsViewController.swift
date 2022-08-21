@@ -176,7 +176,8 @@ extension TopicsViewController: UICollectionViewDelegate {
             }
             
             if collectionView.contentOffset.y == offset {
-                let vc = ViewController()
+                guard let nameTopic = arrayTopics[indexPath.item].slug else { return }
+                let vc = PhotosViewController(nameTopic: nameTopic)
                 let navigation = UINavigationController(rootViewController: vc)
                 navigationController?.pushViewController(vc, animated: true)
             }
