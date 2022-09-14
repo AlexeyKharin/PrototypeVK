@@ -10,8 +10,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let authCOntroller = TopicsViewController()
+        let tabBarcontroller = CustomTabBarController()
         //        let authCOntroller = CheckCodeViewController(numberPhone: "+375296534897", verificationID: "", typeAuthorization: .logIn)
-        let navigation = UINavigationController(rootViewController: authCOntroller)
+        let navigation = UINavigationController(rootViewController: tabBarcontroller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }

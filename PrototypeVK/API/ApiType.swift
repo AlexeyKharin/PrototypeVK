@@ -71,6 +71,7 @@ enum ApiType {
         let httpMethod = "get"
         return httpMethod
     }
+    
     var url: URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = self.scheme

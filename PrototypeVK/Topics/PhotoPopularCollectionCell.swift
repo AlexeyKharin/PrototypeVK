@@ -12,7 +12,7 @@ class PhotoPopularCollectionCell: UICollectionViewCell {
             let photoUrl = photoResultElement?.urls?.regular
             guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
             guard let name = photoResultElement?.user?.name else { return }
-
+            
             titlePopularPhoto.text = "The most popular photo by \(name)"
             image.sd_setImage(with: url, completed: nil)
         }

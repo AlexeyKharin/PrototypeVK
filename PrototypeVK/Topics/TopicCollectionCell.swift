@@ -66,7 +66,7 @@ class TopicCollectionCell: UICollectionViewCell {
         contentView.addSubview(image)
         image.addSubview(imageCoverView)
         image.addSubview(titleTopicLabel)
-        
+      
         let constraints = [
 
             image.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -97,7 +97,6 @@ class TopicCollectionCell: UICollectionViewCell {
 
         imageCoverView.alpha = maxAlpha - (delta * (maxAlpha - minAlpha))
      
-        
         let scale = max(delta, 0.38)
         titleTopicLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
         titleTopicLabel.alpha = 1 - ((1 - delta) * (maxAlpha - minAlpha))

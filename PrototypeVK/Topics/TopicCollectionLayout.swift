@@ -67,7 +67,6 @@ extension TopicCollectionLayout {
         
         var frame = CGRect.zero
         var y: CGFloat = 0
-//        var minY: CGFloat = 280
         
         for item in 0..<numberOfItemsInSectionOne {
             let indexPath = IndexPath(item: item, section: 0)
@@ -86,6 +85,7 @@ extension TopicCollectionLayout {
                 if let cell = collectionView?.cellForItem(at: indexPath) as? PhotoPopularCollectionCell {
                     cell.imageCoverView.alpha = 0.8
                     cell.titleChooseCategory.transform = CGAffineTransform(scaleX: 0, y: 0)
+                    
                 }
                 
             } else if  indexPath.item == 0 && indexPath.item == featuredItemIndex {

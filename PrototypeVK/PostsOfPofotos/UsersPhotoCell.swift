@@ -3,16 +3,17 @@ import Foundation
 import UIKit
 import SDWebImage
 
-class CompositionalCellPhoto: UICollectionViewCell {
+class UsersPhotoCell: UICollectionViewCell {
     
-    static let identifier = "CompositionalCellPhoto"
+    static let identifier = "UsersPhotoCell"
     
     var photoResultElement: PhotoElement? {
         didSet {
-            
             let photoUrl = photoResultElement?.urls?.small
             guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
+            guard let userName = photoResultElement?.user?.name else { return }
             
+            self.usersName.text = userName
             image.sd_setImage(with: url, completed: nil)
         }
     }
@@ -25,9 +26,18 @@ class CompositionalCellPhoto: UICollectionViewCell {
         return imageRain
     }()
     
+    private let usersName: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        label.toAutoLayout()
+        return label
+    }()
+ 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
     }
     
@@ -38,6 +48,7 @@ class CompositionalCellPhoto: UICollectionViewCell {
     private func setupViews() {
         
         contentView.addSubview(image)
+        image.addSubview(usersName)
         
         let constraints = [
             
@@ -45,6 +56,9 @@ class CompositionalCellPhoto: UICollectionViewCell {
             image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            usersName.bottomAnchor.constraint(equalTo: image.bottomAnchor),
+            usersName.leadingAnchor.constraint(equalTo: image.leadingAnchor, constant: 4),
         ]
         
         NSLayoutConstraint.activate(constraints)
