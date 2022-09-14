@@ -2,11 +2,35 @@
 import Foundation
 
 // MARK: - PhotoElement
-struct PhotoElement: Decodable {
+struct PhotoElement: Decodable, Hashable {
     let id: String?
     let width, height: Int?
     let user: User?
     let urls: UrlsForPhoto?
+    let likes: Int?
+    let description: String?
+    let createdAt: String?
+    let updatedAt: String?
+
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+        
+    }
+    
+    static func == (lhs: PhotoElement, rhs: PhotoElement) -> Bool {
+        
+        return lhs.identifier == rhs.identifier
+    }
+    
+    private let identifier = UUID()
+    
+    enum CodingKeys: String, CodingKey {
+        case id, width, height, user, urls, likes, description
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
 }
 
 // MARK: - Urls
@@ -18,6 +42,19 @@ struct UrlsForPhoto: Decodable {
 // MARK: - User
 struct User: Decodable {
     let id, username, name: String?
+    let profileImage: ProfileImage?
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case id, username, name
+        case profileImage = "profile_image"
+    }
 }
+
+// MARK: - User
+struct ProfileImage: Decodable {
+    let small, medium, large: String?
+}
+
 
 typealias PhotosResult = [PhotoElement]

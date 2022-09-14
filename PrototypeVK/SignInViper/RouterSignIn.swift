@@ -18,8 +18,8 @@ class RouterSignIn: SignInRouterProtocol {
     }
     
     func succesBiometricAuthorization() {
-        let vc = TopicsViewController()
-        view?.navigationController?.pushViewController(vc, animated: true)
+//        let vc = TopicsViewController()
+//        view?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func showAlerAuthorization(tittle: String, message: String) {
