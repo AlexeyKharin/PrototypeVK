@@ -112,7 +112,7 @@ class CheckCodeViewController: UIViewController {
     @objc
     func authorizationPhoneNumber() {
         guard let codeValidVC = codeVCTextField.text else { return }
-        presenter?.checkVerificationCode(withVerificationID: verificationID, verificationCode: codeValidVC)
+        presenter?.checkVerificationCode(withVerificationID: verificationID, verificationCode: codeValidVC, numberPhone: numberPhone)
 
     }
     
@@ -177,7 +177,7 @@ class CheckCodeViewController: UIViewController {
 }
 
 extension CheckCodeViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { 
         self.view.endEditing(true)
         return false
     }

@@ -59,6 +59,7 @@
 		B4A95E1D28CF02DD004A618C /* DetailPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A95E1C28CF02DD004A618C /* DetailPhotosViewController.swift */; };
 		B4A95E1F28CFAEDB004A618C /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A95E1E28CFAEDB004A618C /* ImageScrollView.swift */; };
 		B4A95E2228CFB0CE004A618C /* DetailPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A95E2128CFB0CE004A618C /* DetailPhotoCell.swift */; };
+		B4AED1CC28E4D2330086BFFF /* LikedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AED1CB28E4D2330086BFFF /* LikedPhoto.swift */; };
 		B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3228424A190027C168 /* SignInViewController.swift */; };
 		B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3428424AB70027C168 /* LogInViewController.swift */; };
 		B4B10C3728424DD30027C168 /* CheckCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */; };
@@ -73,9 +74,14 @@
 		B4B14F8028AD84EF00BC355F /* TopicResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F7F28AD84EF00BC355F /* TopicResult.swift */; };
 		B4B14F8328AE2AE600BC355F /* TopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */; };
 		B4B2373E28C7AC3800D262DF /* ResearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2373D28C7AC3800D262DF /* ResearchViewController.swift */; };
+		B4B2E73B28E9AEC300DEC5F8 /* KeyChainDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2E73928E9AEC300DEC5F8 /* KeyChainDataProvider.swift */; };
+		B4B2E73C28E9AEC300DEC5F8 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2E73A28E9AEC300DEC5F8 /* KeychainConfiguration.swift */; };
+		B4B2E73E28EA163600DEC5F8 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2E73D28EA163600DEC5F8 /* AuthData.swift */; };
+		B4B2E74228EB62B600DEC5F8 /* OAth2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2E74128EB62B500DEC5F8 /* OAth2ViewController.swift */; };
 		B4C0503C28AE326100F4F834 /* TopicCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */; };
 		B4C0503E28AE344500F4F834 /* TopicCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */; };
 		B4C0504028AE746300F4F834 /* PhotoPopularCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */; };
+		B4FCC05328EC86AC00E69E26 /* AccessResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FCC05228EC86AC00E69E26 /* AccessResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +139,7 @@
 		B4A95E1C28CF02DD004A618C /* DetailPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotosViewController.swift; sourceTree = "<group>"; };
 		B4A95E1E28CFAEDB004A618C /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		B4A95E2128CFB0CE004A618C /* DetailPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoCell.swift; sourceTree = "<group>"; };
+		B4AED1CB28E4D2330086BFFF /* LikedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPhoto.swift; sourceTree = "<group>"; };
 		B4B10C3228424A190027C168 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3428424AB70027C168 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B4B10C3628424DD30027C168 /* CheckCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCodeViewController.swift; sourceTree = "<group>"; };
@@ -147,9 +154,14 @@
 		B4B14F7F28AD84EF00BC355F /* TopicResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResult.swift; sourceTree = "<group>"; };
 		B4B14F8228AE2AE600BC355F /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
 		B4B2373D28C7AC3800D262DF /* ResearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchViewController.swift; sourceTree = "<group>"; };
+		B4B2E73928E9AEC300DEC5F8 /* KeyChainDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainDataProvider.swift; sourceTree = "<group>"; };
+		B4B2E73A28E9AEC300DEC5F8 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		B4B2E73D28EA163600DEC5F8 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+		B4B2E74128EB62B500DEC5F8 /* OAth2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAth2ViewController.swift; sourceTree = "<group>"; };
 		B4C0503B28AE326100F4F834 /* TopicCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionCell.swift; sourceTree = "<group>"; };
 		B4C0503D28AE344500F4F834 /* TopicCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCollectionLayout.swift; sourceTree = "<group>"; };
 		B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPopularCollectionCell.swift; sourceTree = "<group>"; };
+		B4FCC05228EC86AC00E69E26 /* AccessResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessResult.swift; sourceTree = "<group>"; };
 		FD881D356E44B3578A172706 /* Pods-PrototypeVK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrototypeVK.debug.xcconfig"; path = "Target Support Files/Pods-PrototypeVK/Pods-PrototypeVK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -376,12 +388,15 @@
 				B456896828311CB1007FA9F5 /* AppDelegate.swift */,
 				B456896A28311CB1007FA9F5 /* SceneDelegate.swift */,
 				B456896C28311CB1007FA9F5 /* ViewController.swift */,
+				B4B2E74128EB62B500DEC5F8 /* OAth2ViewController.swift */,
+				B4B2E73D28EA163600DEC5F8 /* AuthData.swift */,
 				B4A37B2128C7336400500260 /* CustomTabBarController */,
 				B4A746B428B113EC00DF2382 /* PostsOfPofotos */,
 				B4B14F8128AE2AB700BC355F /* Topics */,
 				B49C784028467B2500D9FFB1 /* ColorMode */,
 				B4B10C3828424E0B0027C168 /* Authorization */,
 				B4478D4D283A6E5500A4CDFB /* Images.swift */,
+				B4B2E73828E9AD6B00DEC5F8 /* KeyChain */,
 				B4096B8128D106620030502F /* UIview.swift */,
 				B4B14F7A28AD7A0100BC355F /* API */,
 				B456896E28311CB1007FA9F5 /* Main.storyboard */,
@@ -508,6 +523,8 @@
 				B4B14F7B28AD7A2800BC355F /* ApiType.swift */,
 				B4B14F7D28AD834800BC355F /* NetWorkMamager.swift */,
 				B4B14F7F28AD84EF00BC355F /* TopicResult.swift */,
+				B4FCC05228EC86AC00E69E26 /* AccessResult.swift */,
+				B4AED1CB28E4D2330086BFFF /* LikedPhoto.swift */,
 				B4A746B228AFB23A00DF2382 /* PhotosResult.swift */,
 			);
 			path = API;
@@ -522,6 +539,15 @@
 				B4C0503F28AE746300F4F834 /* PhotoPopularCollectionCell.swift */,
 			);
 			path = Topics;
+			sourceTree = "<group>";
+		};
+		B4B2E73828E9AD6B00DEC5F8 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2E73A28E9AEC300DEC5F8 /* KeychainConfiguration.swift */,
+				B4B2E73928E9AEC300DEC5F8 /* KeyChainDataProvider.swift */,
+			);
+			name = KeyChain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -660,6 +686,7 @@
 				B49C7844284680CF00D9FFB1 /* CustomColors.swift in Sources */,
 				B4B10C3328424A1A0027C168 /* SignInViewController.swift in Sources */,
 				B437D42F285FB4DF0079C09A /* LogInPresenterProtocol .swift in Sources */,
+				B4FCC05328EC86AC00E69E26 /* AccessResult.swift in Sources */,
 				B4B14F7928AC3C7100BC355F /* ConfiguratorAuth.swift in Sources */,
 				B492CDE3283C08E000EF2DD2 /* PhoneNumberView.swift in Sources */,
 				B437D4442860DB750079C09A /* ConfiguratorCheckCode.swift in Sources */,
@@ -681,6 +708,7 @@
 				B437D42B285FB3DA0079C09A /* RouterLogIn.swift in Sources */,
 				B4B2373E28C7AC3800D262DF /* ResearchViewController.swift in Sources */,
 				B4A746B328AFB23A00DF2382 /* PhotosResult.swift in Sources */,
+				B4B2E73E28EA163600DEC5F8 /* AuthData.swift in Sources */,
 				B4B10C3528424AB70027C168 /* LogInViewController.swift in Sources */,
 				B4B14F7428AC398600BC355F /* AuthRouterProtocol.swift in Sources */,
 				B4A746BA28B119E600DF2382 /* CompositionalCellPhoto.swift in Sources */,
@@ -701,14 +729,18 @@
 				B4A95E1D28CF02DD004A618C /* DetailPhotosViewController.swift in Sources */,
 				B437D40D2857BCE70079C09A /* SignInRouterProtocol.swift in Sources */,
 				B437D3F92857A2BD0079C09A /* OffsetTextField.swift in Sources */,
+				B4AED1CC28E4D2330086BFFF /* LikedPhoto.swift in Sources */,
 				B437D433285FB55C0079C09A /* LogInInteractorOutput.swift in Sources */,
 				B437D413285A74EB0079C09A /* SignInInteractorOutput.swift in Sources */,
 				B437D4022857A8BF0079C09A /* ConfiguratorSignIn.swift in Sources */,
 				B437D417285A75AC0079C09A /* SignInPresenterProtocol.swift in Sources */,
 				B4B14F8328AE2AE600BC355F /* TopicsViewController.swift in Sources */,
+				B4B2E74228EB62B600DEC5F8 /* OAth2ViewController.swift in Sources */,
+				B4B2E73C28E9AEC300DEC5F8 /* KeychainConfiguration.swift in Sources */,
 				B4A95E1F28CFAEDB004A618C /* ImageScrollView.swift in Sources */,
 				B4A95E2228CFB0CE004A618C /* DetailPhotoCell.swift in Sources */,
 				B456896B28311CB1007FA9F5 /* SceneDelegate.swift in Sources */,
+				B4B2E73B28E9AEC300DEC5F8 /* KeyChainDataProvider.swift in Sources */,
 				B4B14F7028AC392C00BC355F /* PresenterAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +908,8 @@
 				DEVELOPMENT_TEAM = C56AM78GK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrototypeVK/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PrototypeVK;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -906,6 +940,8 @@
 				DEVELOPMENT_TEAM = C56AM78GK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrototypeVK/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PrototypeVK;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

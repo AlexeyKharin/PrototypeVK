@@ -1,26 +1,33 @@
 
 import UIKit
 import SnapKit
+import WebKit
 
-class TopicsViewController: UIViewController {
-   
+class TopicsViewController: UIViewController, WKUIDelegate {
+    var webView: WKWebView?
+    
+    private var numberPhone: String
+    
     var currentOffset = CGFloat()
+    
     var arrayTopics: [TopicResultElement] = []
+    
     var photoOfDay: [PhotoElement] = []
+    
     var delegateHideBars: HideOrAppearBars?
-   
-   private var boolForHide: Bool = false {
+    
+    private var boolForHide: Bool = false {
         didSet {
             if boolForHide {
                 delegateHideBars?.hideBars()
             } else  {
                 delegateHideBars?.appearBars()
+            }
         }
     }
-   }
     
     let layout: TopicCollectionLayout = TopicCollectionLayout()
-
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -43,6 +50,15 @@ class TopicsViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    init(numberPhone: String) {
+        self.numberPhone = numberPhone
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setUp() {
         view.addSubview(collectionView)
         
@@ -52,10 +68,10 @@ class TopicsViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
-
+        
         NSLayoutConstraint.activate(constraints)
     }
-  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +79,13 @@ class TopicsViewController: UIViewController {
         
         let urlRequest = ApiType.getTopics.request
         
-        NetWorkMamager.obtainData(request: urlRequest, type: TopicResult.self) { (result) in
-            
+        NetWorkMamager.obtainData(request: urlRequest, type: TopicResult.self) { [weak self](result) in
+            guard let self = self else { return }
             switch result {
             case .success(let posts):
                 self.arrayTopics = posts
                 self.collectionView.reloadData()
-                
+                self.callRepeatPassword()
             case .failure(let error):
                 
                 switch error {
@@ -87,8 +103,8 @@ class TopicsViewController: UIViewController {
         
         let urlRequestPhoto = ApiType.getPopularPhoto.request
         
-        NetWorkMamager.obtainData(request: urlRequestPhoto, type: PhotosResult.self) { (result) in
-            
+        NetWorkMamager.obtainData(request: urlRequestPhoto, type: PhotosResult.self) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let posts):
                 self.photoOfDay = posts
@@ -110,7 +126,7 @@ class TopicsViewController: UIViewController {
         }
     }
 }
-
+    
 //    MARK:- UICollectionViewDataSource
 extension TopicsViewController: UICollectionViewDataSource {
     
@@ -214,5 +230,38 @@ extension TopicsViewController: UICollectionViewDelegate {
                 self.navigationController?.pushViewController(photosViewController, animated: false)
             }
         }
+    }
+}
+
+extension TopicsViewController {
+    
+    func callRepeatPassword() {
+        
+        let  alert = UIAlertController(title: "Приложение «PrototypeVK» хочет использовать «\(ApiType.authentication.host)» для входа", message: "При этом приложению и сайту будет доступно делиться информацией о вас и других пользователей", preferredStyle: .alert)
+        
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { [weak self] _ in
+            guard let self = self else { return }
+            
+            let  alertCancel = UIAlertController(title: "Предупреждение", message: "При этом приложению и сайту будет доступно ограниченная информация о вас и пользователях", preferredStyle: .alert)
+            
+            let actionOk = UIAlertAction(title: "Ok", style: .cancel) { _ in  }
+            
+            alertCancel.addAction(actionOk)
+            self.present(alertCancel, animated: true, completion: nil)
+            
+        }
+        
+        let actionContinue = UIAlertAction(title: "Продолжить", style: .default) {  [weak self] _ in
+            guard let self = self else { return }
+            let vc = OAth2ViewController(numberPhone: self.numberPhone)
+            self.present(vc, animated: true)
+            
+            vc.closePage = { closePage in
+                self.presentedViewController?.dismiss(animated: closePage)
+            }
+            }
+        alert.addAction(actionContinue)
+        alert.addAction(actionCancel)
+        present(alert, animated: true, completion: nil)
     }
 }

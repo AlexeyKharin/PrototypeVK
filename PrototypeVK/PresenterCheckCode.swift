@@ -2,7 +2,7 @@
 import Foundation
 
 protocol CheckCodePresenterProtocol {
-    func checkVerificationCode(withVerificationID: String, verificationCode: String)
+    func checkVerificationCode(withVerificationID: String, verificationCode: String, numberPhone: String)
 }
 
 class PresenterCheckCode {
@@ -13,8 +13,8 @@ class PresenterCheckCode {
 
 extension PresenterCheckCode: CheckCodePresenterProtocol {
     
-    func checkVerificationCode(withVerificationID: String, verificationCode: String) {
-        interactor?.attemptCheckCode(withVerificationID: withVerificationID, verificationCode: verificationCode)
+    func checkVerificationCode(withVerificationID: String, verificationCode: String, numberPhone: String) {
+        interactor?.attemptCheckCode(withVerificationID: withVerificationID, verificationCode: verificationCode, numberPhone: numberPhone)
     }
 }
 
@@ -24,7 +24,7 @@ extension PresenterCheckCode: CheckCodeInteractorOutput {
         router?.showAlert(tittle: tittle)
     }
     
-    func succesAuthorization() {
-        router?.succesAuthorization()
+    func succesAuthorization(numberPhone: String) {
+        router?.succesAuthorization(numberPhone: numberPhone)
     }
 }

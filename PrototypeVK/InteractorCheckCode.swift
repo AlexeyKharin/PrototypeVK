@@ -5,19 +5,19 @@ import FirebaseAuth
 import FlagPhoneNumber
 
 protocol CheckCodeInteractorInput {
-    func attemptCheckCode(withVerificationID: String, verificationCode: String)
+    func attemptCheckCode(withVerificationID: String, verificationCode: String, numberPhone: String)
 }
 
 protocol CheckCodeInteractorOutput: AnyObject {
     func errorAthorization(description tittle: String)
-    func succesAuthorization()
+     func succesAuthorization(numberPhone: String)
 }
 
 class InteractorCheckCode: CheckCodeInteractorInput {
     
     weak var outPut: CheckCodeInteractorOutput?
     
-    func attemptCheckCode(withVerificationID: String, verificationCode: String) {
+    func attemptCheckCode(withVerificationID: String, verificationCode: String, numberPhone: String) {
         
         let credetional = PhoneAuthProvider.provider().credential(withVerificationID: withVerificationID, verificationCode: verificationCode)
         
@@ -25,7 +25,7 @@ class InteractorCheckCode: CheckCodeInteractorInput {
             if error != nil {
                 self?.outPut?.errorAthorization(description: error?.localizedDescription ?? "")
             } else {
-                self?.outPut?.succesAuthorization()
+                self?.outPut?.succesAuthorization(numberPhone: numberPhone)
             }
         }
     }
