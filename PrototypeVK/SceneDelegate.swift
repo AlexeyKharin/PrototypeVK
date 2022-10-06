@@ -2,19 +2,20 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
+   
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let authCOntroller = TopicsViewController()
-        let tabBarcontroller = CustomTabBarController()
-        //        let authCOntroller = CheckCodeViewController(numberPhone: "+375296534897", verificationID: "", typeAuthorization: .logIn)
-        let navigation = UINavigationController(rootViewController: tabBarcontroller)
+
+//        let tabBarcontroller = CustomTabBarController()
+        let auth = AuthViewController()
+        let navigation = UINavigationController(rootViewController: auth)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
+
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -44,5 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-}
+    
+    }
+
 

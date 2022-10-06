@@ -25,6 +25,12 @@ class NetWorkMamager {
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200  {
                 print(httpResponse.statusCode)
+                print(httpResponse)
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201  {
+                print(httpResponse.statusCode)
+                
             }
             
             if let error = error {
@@ -34,8 +40,8 @@ class NetWorkMamager {
             
             if let parsaData = data {
                 guard let posts = try? decoder.decode(type.self, from: parsaData) else {
+                    print(String(data: parsaData, encoding: .utf8) ?? "empty data")
                     result = .failure(.failedDecodeData)
-                    print(parsaData.description)
                     return
                 }
                 

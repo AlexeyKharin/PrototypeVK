@@ -4,16 +4,16 @@ import UIKit
 
 protocol CheckCodeRouterProtocol {
     func showAlert(tittle: String)
-    func succesAuthorization()
+    func succesAuthorization(numberPhone: String)
 }
 
 class RouterCheckCode: CheckCodeRouterProtocol {
     
     weak var view: UIViewController?
     
-    func succesAuthorization() {
-//        let vc = TopicsViewController()
-//        view?.navigationController?.pushViewController(vc, animated: true)
+    func succesAuthorization(numberPhone: String) {
+        let vc = CustomTabBarController(numberPhone: numberPhone)
+        view?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func showAlert(tittle: String) {

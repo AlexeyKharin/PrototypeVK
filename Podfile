@@ -11,5 +11,6 @@ target 'PrototypeVK' do
 	pod 'FlagPhoneNumber'
 	pod 'SnapKit', '~> 5.0.0'
 	pod 'SDWebImage', '~> 5.0'
-  
+  	pod 'KeychainAccess'
+	pod 'AppAuth' 
 end

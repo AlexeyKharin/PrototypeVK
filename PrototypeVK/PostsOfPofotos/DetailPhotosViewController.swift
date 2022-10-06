@@ -48,7 +48,9 @@ class DetailPhotosViewController: UIViewController {
     }()
     
     var arrayPhotoOfTopicElement: [PhotoElement] = []
+    
     var indexPath: IndexPath
+    
     private let layout = UICollectionViewFlowLayout()
     
     lazy var collectionView: UICollectionView = {
@@ -76,7 +78,7 @@ class DetailPhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //                collectionView.frame = view.frame
-        collectionView.setContentOffset(CGPoint(x: 0, y: 1000) , animated: true)
+//        collectionView.setContentOffset(CGPoint(x: 0, y: 1000) , animated: true)
         view.addSubview(collectionView)
         view.addSubview(customNavigationBar)
         customNavigationBar.addSubview(titleTopics)
@@ -87,7 +89,7 @@ class DetailPhotosViewController: UIViewController {
                                            width: view.frame.size.width,
                                            height: 50)
         view.backgroundColor = .white
-//        view.alpha = 0.85
+        //        view.alpha = 0.85
         let constraints = [
             titleTopics.topAnchor.constraint(equalTo: customNavigationBar.topAnchor, constant: 12),
             titleTopics.centerXAnchor.constraint(equalTo: customNavigationBar.centerXAnchor),
@@ -113,7 +115,7 @@ class DetailPhotosViewController: UIViewController {
             self.collectionView.scrollToItem(at: self.indexPath, at: .top, animated: false)
             collectionView.reloadData()
         }
-       
+        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -138,7 +140,16 @@ extension DetailPhotosViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        cell.delegateUpdatephoto = self
         cell.photoResultElement = arrayPhotoOfTopicElement[indexPath.item]
+        cell.updateLikes = {
+            self.collectionView.reloadData()
+        }
+        
+        if let liked = arrayPhotoOfTopicElement[indexPath.item].likedByUser {
+            cell.switcher = liked
+        }
+        
         return cell
     }
 }
@@ -163,9 +174,11 @@ extension DetailPhotosViewController: UICollectionViewDelegateFlowLayout {
         
         let imageSize = arrayPhotoOfTopicElement[indexPath.item]
         let boundsSize = view.bounds.size
+        guard let imageWidth = imageSize.width else  { return CGSize() }
+        guard let imageHeight = imageSize.height else  { return CGSize() }
         
-        let xScale = boundsSize.width/CGFloat(((imageSize.width!)))
-        let yScale = boundsSize.height/CGFloat(((imageSize.height!)))
+        let xScale = boundsSize.width/CGFloat(imageWidth)
+        let yScale = boundsSize.height/CGFloat(imageHeight)
         let minScale = xScale
         
         let width: CGFloat = (collectionView.frame.width)
@@ -177,7 +190,7 @@ extension DetailPhotosViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: (view.frame.size.height * 0.5) + 130)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: .zero, left: .zero, bottom: 20, right: .zero)
     }
@@ -203,3 +216,42 @@ extension DetailPhotosViewController {
         }
     }
 }
+
+protocol UpdatePhotos {
+    func updatePhoto(id: String)
+    
+}
+
+extension DetailPhotosViewController: UpdatePhotos {
+    
+    func updatePhoto(id: String){
+        
+        let urlLRequest = ApiType.updatePhoto(id: id).request
+        
+        NetWorkMamager.obtainData(request: urlLRequest, type: PhotoElement.self) {  (result) in
+                        switch result {
+            case .success(let data):
+               print(data)
+                if let removeIndex = self.arrayPhotoOfTopicElement.firstIndex(where: { $0.id == id }) {
+//                    self.arrayPhotoOfTopicElement.remove(at: removeIndex)
+//                    self.arrayPhotoOfTopicElement.insert(data, at: removeIndex)
+                    self.arrayPhotoOfTopicElement[removeIndex].likedByUser = data.likedByUser
+                    self.arrayPhotoOfTopicElement[removeIndex].likes = data.likes
+                    self.collectionView.reloadData()
+                }
+                
+                print("success")
+            case .failure(let error):
+                switch error {
+                case .failedConnect:
+                    print("error failedConnect \(error.localizedDescription)")
+                case .failedDecodeData:
+                    print("error failedDecodeData \(error.localizedDescription)")
+                case .failedGetGetData(debugDescription: let description):
+                    print("error failedGetGetData")
+                }
+            }
+        }
+    }
+}
+

@@ -44,10 +44,6 @@ class TopicCollectionCell: UICollectionViewCell {
         label.textColor = .white
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
-//        label.layer.shadowColor = UIColor.gray.cgColor
-//        label.layer.shadowRadius = 4
-//        label.layer.shadowOffset = CGSize(width: 5, height: 4)
-//        label.layer.shadowOpacity = 0.5
         return label
     }()
     

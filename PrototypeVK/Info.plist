@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Please allow to continue with face ID</string>
-	<key>CFBundleDisplayName</key>
-	<string>PrototypeVK</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -14,6 +10,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.832317512985-4l5plt8fss977fshi3si28u0k2bqvob6</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob</string>
 			</array>
 		</dict>
 	</array>

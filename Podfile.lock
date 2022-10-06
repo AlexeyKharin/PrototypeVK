@@ -1,4 +1,10 @@
 PODS:
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
+    - AppAuth/Core
   - Firebase (8.8.0):
     - Firebase/Core (= 8.8.0)
   - Firebase/Auth (8.8.0):
@@ -93,6 +99,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.0)
+  - KeychainAccess (4.2.2)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -105,14 +112,17 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - AppAuth
   - Firebase
   - Firebase/Auth
   - FlagPhoneNumber
+  - KeychainAccess
   - SDWebImage (~> 5.0)
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -124,12 +134,14 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - KeychainAccess
     - nanopb
     - PromisesObjC
     - SDWebImage
     - SnapKit
 
 SPEC CHECKSUMS:
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseAnalytics: 5506ea8b867d8423485a84b4cd612d279f7b0b8a
   FirebaseAuth: bcf0adeff88bda5dcb3beeabe5760f1226ab7b2f
@@ -141,11 +153,12 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 34cee0bf8ab1c83351cfe4bdaa18e8b96950a52b
+PODFILE CHECKSUM: d6367635ebd4c44c86f56945ce2685341bd026b2
 
 COCOAPODS: 1.11.3

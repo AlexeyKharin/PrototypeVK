@@ -58,7 +58,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.imageZoomView.isUserInteractionEnabled = true
     }
 
-    
     func setCurrentMaxandMinZoomScale() {
 
         self.minimumZoomScale = 1.0

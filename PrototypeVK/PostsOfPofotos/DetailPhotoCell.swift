@@ -4,9 +4,10 @@ import UIKit
 import SDWebImage
 
 class DetailPhotoCell: UICollectionViewCell {
+    var delegateUpdatephoto: UpdatePhotos?
     
     static let identifier = "DetailPhotoCell"
-    
+    var updateLikes: (() -> Void)?
     var photoResultElement: PhotoElement? {
         didSet {
             let photoUrl = photoResultElement?.urls?.small
@@ -33,9 +34,7 @@ class DetailPhotoCell: UICollectionViewCell {
                 likesLabel.text = "Нравится: 0"
                 print("неудача")
             }
-        
-         
-           
+                   
             image.sd_setImage(with: url, completed: nil)
             profileImage.sd_setImage(with: profileUrl, completed: nil)
             imageScrollView.set(image: image)
@@ -94,14 +93,94 @@ class DetailPhotoCell: UICollectionViewCell {
     }()
     
     lazy var buttonLike: UIButton = {
-//        let button = UIButton(type: .system)
         let button = UIButton(type: .infoDark)
         button.scalesLargeContentImage = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         button.toAutoLayout()
-        button.setImage(UIImage(systemName: "heart")!.applyingSymbolConfiguration(.init(pointSize: CGFloat(), weight: .bold, scale: .large))! .withTintColor(.black).withRenderingMode(.alwaysOriginal), for:.normal)
+        button.addTarget(self, action: #selector(likePhoto), for: .touchUpInside)
         return button
     }()
+
+    @objc
+    func likePhoto(_ sender: UIButton) {
+        let tag = sender.tag
+        
+        guard let id = photoResultElement?.id else { return }
+        
+        if tag == 1 {
+            print("disLike")
+            
+            let urlLRequest = ApiType.deleteLike(id: id).request
+            NetWorkMamager.obtainData(request: urlLRequest, type: LikedPhoto.self) {  (result) in
+                
+                switch result {
+                case .success(let data):
+                    self.delegateUpdatephoto?.updatePhoto(id: id)
+                    print("success")
+                case .failure(let error):
+                    switch error {
+                    case .failedConnect:
+                        print("error failedConnect \(error.localizedDescription)")
+                    case .failedDecodeData:
+                        print("error failedDecodeData \(error.localizedDescription)")
+                    case .failedGetGetData(debugDescription: let description):
+                        print("error failedGetGetData")
+                    }
+                }
+            }
+            
+        } else if tag == 2 {
+            print("like")
+            let urlLRequest = ApiType.likePhoto(id: id).request
+            NetWorkMamager.obtainData(request: urlLRequest, type: LikedPhoto.self) {  (result) in
+                
+                switch result {
+                case .success(let data):
+                    self.delegateUpdatephoto?.updatePhoto(id: id)
+                    print("success")
+                case .failure(let error):
+                    switch error {
+                    case .failedConnect:
+                        print("error failedConnect \(error.localizedDescription)")
+                    case .failedDecodeData:
+                        print("error failedDecodeData \(error.localizedDescription)")
+                    case .failedGetGetData(debugDescription: let description):
+                        print("error failedGetGetData")
+                    }
+                }
+            }
+        }
+    }
+    
+    var switcher: Bool? {
+        didSet {
+            if switcher! {
+                buttonLike.setImage(UIImage(systemName: "heart.fill")!.applyingSymbolConfiguration(.init(pointSize: CGFloat(), weight: .bold, scale: .large))! .withTintColor(.red).withRenderingMode(.alwaysOriginal), for:.normal)
+                buttonLike.tag = 1
+                print("red")
+                
+                if let likes = photoResultElement?.likes {
+                    likesLabel.text = "Нравится: \(likes)"
+                } else {
+                    likesLabel.text = "Нравится: 0"
+                    print("неудача")
+                }
+                
+            } else {
+              
+                buttonLike.setImage(UIImage(systemName: "heart")!.applyingSymbolConfiguration(.init(pointSize: CGFloat(), weight: .bold, scale: .large))! .withTintColor(.black).withRenderingMode(.alwaysOriginal), for:.normal)
+                buttonLike.tag = 2
+                print("white")
+                
+                if let likes = photoResultElement?.likes {
+                    likesLabel.text = "Нравится: \(likes)"
+                } else {
+                    likesLabel.text = "Нравится: 0"
+                    print("неудача")
+                }
+            }
+        }
+    }
     
     lazy var buttonMessage: UIButton = {
         let button = UIButton(type: .system)
@@ -136,13 +215,7 @@ class DetailPhotoCell: UICollectionViewCell {
     private func setupViews() {
         
         profileImage.layer.cornerRadius = 14
-        
-//        contentView.layer.cornerRadius = 10
-//        contentView.layer.borderWidth = 2
-//        contentView.layer.borderColor = UIColor.systemGray.cgColor
-//        contentView.addSubview(imageScrollView)
-//        contentView.addSubview(profileImage)
-//        contentView.addSubview(usersName)
+    
         [imageScrollView,  profileImage, usersName, likesLabel, descriptionLable, buttonLike, buttonMessage, buttonShare, buttonSaved].forEach{ contentView.addSubview($0)}
 
         let constraints = [

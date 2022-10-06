@@ -4,7 +4,10 @@ import UIKit
 class CustomTabBarController: UIViewController {
     
     var changeToYPoint: CGFloat?
+    
     var changeBackYPoint: CGFloat?
+    
+    var numberPhone: String
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -21,6 +24,16 @@ class CustomTabBarController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
+    
+    init(numberPhone: String) {
+        self.numberPhone = numberPhone
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     var customTabBar: UIView = {
         let view = UIView()
@@ -74,7 +87,8 @@ class CustomTabBarController: UIViewController {
         return button
     }()
     
-    let topicsViewController = TopicsViewController()
+    lazy var topicsViewController = TopicsViewController(numberPhone: numberPhone)
+    
     lazy var navigation = UINavigationController(rootViewController: topicsViewController)
     
     func firstScreen() {

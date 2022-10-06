@@ -126,23 +126,32 @@ class PhotosViewController: UIViewController {
     }()
     
     var arrayPhotoOfTopicElement: [PhotoElement] = []
+    var nameTopic: String
     
     init(nameTopic: String, titleTopic: String) {
+        self.nameTopic = nameTopic
         super.init(nibName: nil, bundle: nil)
-        
         titleTopics.text = titleTopic
-        
-        let urlTopicsRequest = ApiType.getPhotosOfTopic(topic: nameTopic).request
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var currentPage: Int = 1
+
+
+    func getPhotosOfTopic(nameTopic: String, currenPage: Int) {
+        let urlTopicsRequest = ApiType.getPhotosOfTopic(topic: nameTopic, page: currenPage).request
         
         NetWorkMamager.obtainData(request: urlTopicsRequest, type: PhotosResult.self) {  (result) in
             
             switch result {
             case .success(let data):
-                self.arrayPhotoOfTopicElement = data
+                
+                self.arrayPhotoOfTopicElement.append(contentsOf: data)
                 self.customLayoutPhotos.arrayPhotoOfTopicElement = data
                 self.collectionView.reloadData()
-                //                self.configureDataSource()
-                
             case .failure(let error):
                 switch error {
                 case .failedConnect:
@@ -154,10 +163,6 @@ class PhotosViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoElement>?
@@ -175,10 +180,10 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updatePresentationStyle()
-        
+        getPhotosOfTopic(nameTopic: nameTopic, currenPage: currentPage)
+        self.collectionView.reloadData()
         collectionView.frame = view.frame
         view.backgroundColor = .white
-//        view.alpha = 0.85
         view.addSubview(collectionView)
         view.addSubview(customNavigationBar)
         customNavigationBar.addSubview(titleTopics)
@@ -278,13 +283,15 @@ extension PhotosViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+//        getPhotosOfTopic(nameTopic: nameTopic)
+        collectionView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
+//        arrayPhotoOfTopicElement = []
     }
-    
 }
 
 //    MARK: - UICollectionViewDataSource
@@ -307,6 +314,8 @@ extension PhotosViewController: UICollectionViewDataSource {
             cell.photoResultElement = arrayPhotoOfTopicElement[indexPath.item]
             
             return cell
+            
+                
         case .table:
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: UsersPhotoCell.identifier, for: indexPath)
