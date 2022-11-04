@@ -266,7 +266,7 @@ extension PhotosViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
-//        arrayPhotoOfTopicElement = []
+
     }
 }
 
@@ -367,7 +367,8 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
         
-        collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { _ in
+        collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { [weak self] _  in
+            guard let self = self else { return }
             image.removeFromSuperview()
             
             let arrayUIModelDetailPhotoCell = self.arrayPhotoOfTopicElement.map { UIModelDetailPhotoCell(likes: String($0.likes ?? 0), profileImage: $0.user?.profileImage?.medium, image: $0.urls?.small, description: $0.description, usersName: $0.user?.name, likedByUser: $0.likedByUser, id: $0.id, height: $0.height, width: $0.width, callUserName:  $0.user?.username) }
@@ -400,6 +401,7 @@ extension PhotosViewController: UICollectionViewDelegate {
 extension PhotosViewController {
     func hideBars() {
         UIView.animate(withDuration: 0.7, delay: 0.0, options: .curveLinear) {
+            
             self.customNavigationBar.frame.origin.y = -50
             
         } completion: { (true) in

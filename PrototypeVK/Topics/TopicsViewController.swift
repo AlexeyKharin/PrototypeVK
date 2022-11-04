@@ -215,7 +215,9 @@ extension TopicsViewController: UICollectionViewDelegate {
                 
                 let photosViewController = PhotosViewController(nameTopic: nameTopic, titleTopic: titleTopic)
                 
-                photosViewController.closureHideBars = { boolHide in
+                photosViewController.closureHideBars = { [weak self] boolHide in
+                    guard let self = self else { return }
+                    
                     if boolHide {
                         self.delegateHideBars?.hideBars()
                     } else {
@@ -261,7 +263,9 @@ extension TopicsViewController {
             let vc = OAth2ViewController(numberPhone: self.numberPhone)
             self.present(vc, animated: true)
             
-            vc.closePage = { closePage in
+            vc.closePage = { [weak self] closePage in
+                guard let self = self else { return }
+                
                 self.presentedViewController?.dismiss(animated: closePage)
             }
             }

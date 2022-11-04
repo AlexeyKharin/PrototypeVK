@@ -19,8 +19,6 @@ class ResearchViewController: UIViewController  {
     
     var offsetImage = Int()
     
-    var closureHideBars: ((Bool) -> Void)?
-    
     var delegateHideBars: HideOrAppearBars?
     
     private enum SelectedScopeBar: String, CaseIterable {
@@ -59,12 +57,10 @@ class ResearchViewController: UIViewController  {
     private var boolForHide: Bool = false {
         didSet {
             if boolForHide {
-                closureHideBars?(boolForHide)
                 delegateHideBars?.hideBars()
                 offsetImage = 87
                 navigationController?.setNavigationBarHidden(boolForHide, animated: true)
             } else  {
-                closureHideBars?(boolForHide)
                 delegateHideBars?.appearBars()
                 offsetImage = 37
                 navigationController?.setNavigationBarHidden(boolForHide, animated: true)
@@ -393,6 +389,13 @@ extension ResearchViewController: UICollectionViewDelegate {
             guard let userName = arrayUsersOfSearch[indexPath.item].username else { return }
             
             let vc = UserViewController(userName: userName)
+            
+            vc.closureHideBars = { [weak self] bool in
+                guard let self = self  else { return }
+                
+                self.boolForHide = bool
+            }
+            
             self.navigationController?.pushViewController(vc, animated: true)
             
         case .collections:
@@ -451,7 +454,8 @@ extension ResearchViewController: UICollectionViewDelegate {
                 image.frame = cell.frame
             }
             
-            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { _ in
+            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { [weak self] _ in
+                guard let self = self else { return }
                 image.removeFromSuperview()
                 
                 
@@ -475,7 +479,6 @@ extension ResearchViewController: UICollectionViewDelegate {
     }
 }
 
-
 // MARK: - UISearchBarDelegat
 extension ResearchViewController: UISearchBarDelegate, UISearchResultsUpdating {
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
@@ -488,6 +491,7 @@ extension ResearchViewController: UISearchBarDelegate, UISearchResultsUpdating {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.seacrhController.searchBar.text = ""
+        self.serachText = ""
         arrayPhotoOfSearch = []
         arrayUsersOfSearch = []
         arrayCollectionsOfSerach = []
@@ -495,6 +499,7 @@ extension ResearchViewController: UISearchBarDelegate, UISearchResultsUpdating {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        serachText = searchBar.text ?? ""
         getUsersOfSearch(condition: searchBar.text!, page: 1)
         getPhotosOfSearch(condition: searchBar.text!, page: 1)
         getCollectionsOfSearch(condition: searchBar.text!, page: 1)
@@ -506,7 +511,7 @@ extension ResearchViewController: UISearchBarDelegate, UISearchResultsUpdating {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
+        self.seacrhController.searchBar.text = serachText
         print(#function)
     }
     
