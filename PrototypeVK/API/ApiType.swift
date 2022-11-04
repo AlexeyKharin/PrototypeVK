@@ -2,15 +2,33 @@
 import Foundation
 
 enum ApiType {
-    
+    //    MARK: - GetTopics
     case getTopics
     case getPopularPhoto
     case getPhotosOfTopic(topic: String, page: Int)
+    
+    //    MARK: - UpdatePhoto
     case likePhoto(id: String)
     case deleteLike(id: String)
     case updatePhoto(id: String)
+    
+    //    MARK: - Authentication
     case authentication
     case getAccessToken(code: String)
+    
+    //    MARK: - GetPhotosOfCollection
+    case getPhotosOfCollection(id: String, page: Int)
+    
+    //    MARK: - Search
+    case searchPhotos(condition: String, page: Int)
+    case searchCollections(conition: String, page: Int)
+    case searchUsers(condition: String, page: Int)
+    
+//    MARK: - Get user's information
+    case getUserPublicProfile(username: String)
+    case getPhotosOfUser(username: String, page: Int)
+    case getCollectionsOfUser(username: String, page: Int)
+    case getLikedPhotosByUser(username: String, page: Int)
     
     var scheme: String {
         return "https"
@@ -19,8 +37,8 @@ enum ApiType {
     var accsessToken: String {
         
         let keyChainDataProvider = KeyChainDataProvider()
-        guard let index = keyChainDataProvider.obtains().last else { return "" }
-         let accsessToken = keyChainDataProvider.obtain(numberPhone: index)
+        guard let numberPhone = keyChainDataProvider.obtains().last else { return "" }
+        let accsessToken = keyChainDataProvider.obtain(numberPhone: numberPhone)
         return accsessToken
     }
     
@@ -59,11 +77,35 @@ enum ApiType {
         case .updatePhoto(let id):
             return "/photos/\(id)"
             
+        case .getPhotosOfCollection(let id, _):
+            return "/collections/\(id)/photos"
+            
         case .authentication:
             return "/oauth/authorize"
             
         case .getAccessToken:
             return "/oauth/token"
+            
+        case .searchPhotos:
+            return "/search/photos"
+            
+        case .searchCollections:
+            return "/search/collections"
+            
+        case .searchUsers:
+            return "/search/users"
+            
+        case .getUserPublicProfile(let username):
+            return "/users/\(username)"
+            
+        case .getPhotosOfUser(let username, _):
+            return "/users/\(username)/photos"
+            
+        case .getLikedPhotosByUser(let username, _):
+            return "/users/\(username)/likes"
+            
+        case .getCollectionsOfUser(let username, _):
+            return "/users/\(username)/collections"
         }
     }
     
@@ -109,6 +151,68 @@ enum ApiType {
                 "access_token" : accsessToken
             ]
             
+        case .searchPhotos(let condition, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "query": condition,
+                "access_token" : accsessToken
+            ]
+            
+        case .searchCollections(let condition, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "20",
+                "lang": "ru",
+                "query": condition,
+            ]
+            
+        case .searchUsers(let condition, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "query": condition,
+            ]
+            
+        case .getPhotosOfCollection( _, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "access_token" : accsessToken
+            ]
+            
+        case .getUserPublicProfile:
+            inputQuery = [
+                "lang": "ru"
+            ]
+            
+        case .getPhotosOfUser( _, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "access_token" : accsessToken
+            ]
+            
+        case .getCollectionsOfUser( _, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "access_token" : accsessToken
+            ]
+            
+        case .getLikedPhotosByUser( _, let page):
+            inputQuery = [
+                "page": String(page),
+                "per_page": "30",
+                "lang": "ru",
+                "access_token" : accsessToken
+            ]
+            
         case .likePhoto:
             inputQuery = ["access_token" : accsessToken]
             
@@ -134,12 +238,10 @@ enum ApiType {
                 "code" : code,
                 "grant_type": AuthConfiguration.grantType
             ]
-            
         }
         
         return inputQuery
     }
-    
     
     var httpMethod: String {
         let httpMethod: String
@@ -181,7 +283,7 @@ enum ApiType {
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = self.headers
         request.httpMethod = self.httpMethod
-      
+        
         print(request)
         print(url)
         
@@ -195,7 +297,6 @@ extension URLComponents {
         self.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
     }
 }
-
 
 extension URL {
     

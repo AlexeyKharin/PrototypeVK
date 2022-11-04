@@ -4,16 +4,23 @@ import UIKit
 import SDWebImage
 
 class DetailPhotoCell: UICollectionViewCell {
+    
     var delegateUpdatephoto: UpdatePhotos?
     
+    var delegateUnAuthorized: AlertUnAuthorized?
+    
+    var delegateOpenUserInformation: OpenUserViewController?
+    
     static let identifier = "DetailPhotoCell"
+    
     var updateLikes: (() -> Void)?
-    var photoResultElement: PhotoElement? {
+    
+    var photoResultElement: UIModelDetailPhotoCell? {
         didSet {
-            let photoUrl = photoResultElement?.urls?.small
+            let photoUrl = photoResultElement?.image
             guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
             
-            let profileHhotoUrl = photoResultElement?.user?.profileImage?.medium
+            let profileHhotoUrl = photoResultElement?.profileImage
             guard let profileImageUrl = profileHhotoUrl, let profileUrl = URL(string: profileImageUrl) else { return }
 
             if let description = photoResultElement?.description {
@@ -22,7 +29,7 @@ class DetailPhotoCell: UICollectionViewCell {
                 descriptionLable.text = ""
             }
              
-            if let usersName = photoResultElement?.user?.name {
+            if let usersName = photoResultElement?.usersName {
                 self.usersName.text = usersName
             } else {
                 self.usersName.text = ""
@@ -41,6 +48,26 @@ class DetailPhotoCell: UICollectionViewCell {
         }
     }
 
+    lazy var buttonProfileImage: UIButton = {
+        let button = UIButton(type: .system)
+        button.toAutoLayout()
+        button.addTarget(self, action: #selector(openViewController), for: .touchUpInside)
+        return button
+    }()
+    lazy var buttonUserName: UIButton = {
+        let button = UIButton(type: .system)
+        button.toAutoLayout()
+        button.addTarget(self, action: #selector(openViewController), for: .touchUpInside)
+        return button
+    }()
+   
+    @objc
+    func openViewController(_ sender: UIButton) {
+        guard let userName = photoResultElement?.callUserName else { return }
+        delegateOpenUserInformation?.openUserViewController(userName: userName)
+        print(userName)
+    }
+    
     private lazy var imageScrollView: ImageScrollView = {
         let imageScrollView = ImageScrollView(frame: contentView.bounds)
         imageScrollView.toAutoLayout()
@@ -125,6 +152,8 @@ class DetailPhotoCell: UICollectionViewCell {
                         print("error failedDecodeData \(error.localizedDescription)")
                     case .failedGetGetData(debugDescription: let description):
                         print("error failedGetGetData")
+                    case .unAuthorized:
+                        self.delegateUnAuthorized?.calledAlertUnAuthorized()
                     }
                 }
             }
@@ -146,6 +175,8 @@ class DetailPhotoCell: UICollectionViewCell {
                         print("error failedDecodeData \(error.localizedDescription)")
                     case .failedGetGetData(debugDescription: let description):
                         print("error failedGetGetData")
+                    case .unAuthorized:
+                        self.delegateUnAuthorized?.calledAlertUnAuthorized()
                     }
                 }
             }
@@ -214,10 +245,14 @@ class DetailPhotoCell: UICollectionViewCell {
     
     private func setupViews() {
         
+      
         profileImage.layer.cornerRadius = 14
     
         [imageScrollView,  profileImage, usersName, likesLabel, descriptionLable, buttonLike, buttonMessage, buttonShare, buttonSaved].forEach{ contentView.addSubview($0)}
-
+        
+        contentView.addSubview(buttonProfileImage)
+        contentView.addSubview(buttonUserName)
+        
         let constraints = [
             profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             profileImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
@@ -262,7 +297,19 @@ class DetailPhotoCell: UICollectionViewCell {
             descriptionLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
             descriptionLable.heightAnchor.constraint(equalToConstant: 18),
             
-            descriptionLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14)
+            
+            buttonProfileImage.topAnchor.constraint(equalTo: profileImage.topAnchor),
+            buttonProfileImage.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor),
+            buttonProfileImage.trailingAnchor.constraint(equalTo: profileImage.trailingAnchor),
+            buttonProfileImage.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor),
+            
+            buttonUserName.topAnchor.constraint(equalTo: usersName.topAnchor),
+            buttonUserName.leadingAnchor.constraint(equalTo: usersName.leadingAnchor),
+            buttonUserName.trailingAnchor.constraint(equalTo: usersName.trailingAnchor),
+            buttonUserName.bottomAnchor.constraint(equalTo: usersName.bottomAnchor),
+            
+            descriptionLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14),
+            
         ]
         
         NSLayoutConstraint.activate(constraints)

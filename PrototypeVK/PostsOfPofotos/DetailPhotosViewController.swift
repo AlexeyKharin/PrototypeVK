@@ -63,10 +63,14 @@ class DetailPhotosViewController: UIViewController {
         return collectionView
     }()
     
-    init(arrayPhotoOfTopicElement: [PhotoElement], indexPath: IndexPath) {
+    var arrayUIModelDetailPhotoCell: [UIModelDetailPhotoCell]
+    
+    init(arrayUIModelDetailPhotoCell: [UIModelDetailPhotoCell], indexPath: IndexPath) {
         self.indexPath = indexPath
+        
+        self.arrayUIModelDetailPhotoCell = arrayUIModelDetailPhotoCell
+        
         super.init(nibName: nil, bundle: nil)
-        self.arrayPhotoOfTopicElement = arrayPhotoOfTopicElement
         collectionView.reloadData()
         
     }
@@ -77,19 +81,21 @@ class DetailPhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //                collectionView.frame = view.frame
-//        collectionView.setContentOffset(CGPoint(x: 0, y: 1000) , animated: true)
+        
         view.addSubview(collectionView)
         view.addSubview(customNavigationBar)
-        customNavigationBar.addSubview(titleTopics)
+        
         customNavigationBar.addSubview(buttonBack)
         layout.scrollDirection = .vertical
+        collectionView.frame.size.width = view.frame.width
+        
+        customNavigationBar.addSubview(titleTopics)
         customNavigationBar.frame = CGRect(x: view.frame.origin.x,
-                                           y: view.frame.origin.y,
-                                           width: view.frame.size.width,
+                                           y: view.safeAreaInsets.top,
+                                           width: view.frame.width,
                                            height: 50)
         view.backgroundColor = .white
-        //        view.alpha = 0.85
+      
         let constraints = [
             titleTopics.topAnchor.constraint(equalTo: customNavigationBar.topAnchor, constant: 12),
             titleTopics.centerXAnchor.constraint(equalTo: customNavigationBar.centerXAnchor),
@@ -116,7 +122,7 @@ class DetailPhotosViewController: UIViewController {
             collectionView.reloadData()
         }
         
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,7 +135,7 @@ class DetailPhotosViewController: UIViewController {
 extension DetailPhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayPhotoOfTopicElement.count
+        return arrayUIModelDetailPhotoCell.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -141,12 +147,14 @@ extension DetailPhotosViewController: UICollectionViewDataSource {
         }
         
         cell.delegateUpdatephoto = self
-        cell.photoResultElement = arrayPhotoOfTopicElement[indexPath.item]
+        cell.delegateUnAuthorized = self
+        cell.photoResultElement = arrayUIModelDetailPhotoCell[indexPath.item]
+        cell.delegateOpenUserInformation = self
         cell.updateLikes = {
             self.collectionView.reloadData()
         }
         
-        if let liked = arrayPhotoOfTopicElement[indexPath.item].likedByUser {
+        if let liked = arrayUIModelDetailPhotoCell[indexPath.item].likedByUser {
             cell.switcher = liked
         }
         
@@ -172,7 +180,7 @@ extension DetailPhotosViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let imageSize = arrayPhotoOfTopicElement[indexPath.item]
+        let imageSize = arrayUIModelDetailPhotoCell[indexPath.item]
         let boundsSize = view.bounds.size
         guard let imageWidth = imageSize.width else  { return CGSize() }
         guard let imageHeight = imageSize.height else  { return CGSize() }
@@ -209,7 +217,7 @@ extension DetailPhotosViewController {
     
     func appearBars() {
         UIView.animate(withDuration: 0.7, delay: 0.0, options: .curveLinear) {
-            self.customNavigationBar.frame.origin.y = self.view.frame.origin.y
+            self.customNavigationBar.frame.origin.y = self.view.safeAreaInsets.top
             
         } completion: { (true) in
             print("")
@@ -232,11 +240,10 @@ extension DetailPhotosViewController: UpdatePhotos {
                         switch result {
             case .success(let data):
                print(data)
-                if let removeIndex = self.arrayPhotoOfTopicElement.firstIndex(where: { $0.id == id }) {
-//                    self.arrayPhotoOfTopicElement.remove(at: removeIndex)
-//                    self.arrayPhotoOfTopicElement.insert(data, at: removeIndex)
-                    self.arrayPhotoOfTopicElement[removeIndex].likedByUser = data.likedByUser
-                    self.arrayPhotoOfTopicElement[removeIndex].likes = data.likes
+                if let removeIndex = self.arrayUIModelDetailPhotoCell.firstIndex(where: { $0.id == id }) {
+
+                    self.arrayUIModelDetailPhotoCell[removeIndex].likedByUser = data.likedByUser
+                    self.arrayUIModelDetailPhotoCell[removeIndex].likes = String(data.likes ?? 0)
                     self.collectionView.reloadData()
                 }
                 
@@ -249,9 +256,48 @@ extension DetailPhotosViewController: UpdatePhotos {
                     print("error failedDecodeData \(error.localizedDescription)")
                 case .failedGetGetData(debugDescription: let description):
                     print("error failedGetGetData")
+                case .unAuthorized:
+                    self.calledAlertUnAuthorized()
                 }
             }
         }
     }
 }
 
+protocol AlertUnAuthorized {
+    func calledAlertUnAuthorized()
+}
+
+extension DetailPhotosViewController: AlertUnAuthorized {
+    
+    func calledAlertUnAuthorized() {
+        let  alert = UIAlertController(title: "Доступ ограничен", message: "Для получения расширенного доступа к данным необходимо пройти авторизацию ", preferredStyle: .alert)
+        
+        
+        let actionOK = UIAlertAction(title: "ОК", style: .cancel) {  [weak self] _ in
+            guard let self = self else { return }
+        }
+        
+        alert.addAction(actionOK)
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+
+protocol OpenUserViewController {
+    func openUserViewController(userName: String)
+}
+
+extension DetailPhotosViewController: OpenUserViewController {
+    func openUserViewController(userName: String) {
+        
+        let vc = UserViewController(userName: userName)
+        
+        vc.closureHideBars = { bool in
+            self.closureHideBars?(bool)
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+}

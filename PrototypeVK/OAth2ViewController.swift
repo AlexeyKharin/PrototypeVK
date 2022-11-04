@@ -147,6 +147,7 @@ class OAth2ViewController: UIViewController, WKNavigationDelegate {
         ]
         
         NSLayoutConstraint.activate(constraints)
+        
         let url = ApiType.authentication.url
         print(url)
         
@@ -206,6 +207,8 @@ class OAth2ViewController: UIViewController, WKNavigationDelegate {
                         
                     case .failedGetGetData(debugDescription: let description):
                         print("error failedGetGetData")
+                    case .unAuthorized:
+                    break
                     }
                 }
             }
