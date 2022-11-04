@@ -36,6 +36,7 @@ class CustomTabBarController: UIViewController {
     
     
     var customTabBar: UIView = {
+        
         let view = UIView()
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
         view.layer.cornerRadius = 25
@@ -45,51 +46,42 @@ class CustomTabBarController: UIViewController {
     }()
     
     var contentView: UIView = {
-        let view = UIView()
         
+        let view = UIView()
         view.toAutoLayout()
+        
         return view
     }()
     
     lazy var buttonFollowTopicsController: UIButton = {
+        
         let button = UIButton(type: .system)
         button.tag = 1
         button.toAutoLayout()
         button.setImage(UIImage(systemName: "photo")!.applyingSymbolConfiguration(.init(scale: .large))! .withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
         button.addTarget(self, action: #selector(oneClickTabBar), for: .touchUpInside)
+        
         return button
     }()
     
     lazy var buttonFollowReserchController: UIButton = {
+        
         let button = UIButton(type: .system)
         button.tag = 2
         button.toAutoLayout()
         button.setImage(UIImage(systemName: "magnifyingglass")!.applyingSymbolConfiguration(.init(scale: .large))! .withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
         button.addTarget(self, action: #selector(oneClickTabBar), for: .touchUpInside)
+        
         return button
     }()
-    
-    lazy var buttonFollowAdditional: UIButton = {
-        let button = UIButton(type: .system)
-        button.tag = 3
-        button.toAutoLayout()
-        button.setImage(UIImage(systemName:"plus.square.fill")!.applyingSymbolConfiguration(.init(scale: .large))! .withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
-        button.addTarget(self, action: #selector(oneClickTabBar), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var buttonFollowYorAccuont: UIButton = {
-        let button = UIButton(type: .system)
-        button.tag = 4
-        button.toAutoLayout()
-        button.setImage(UIImage(systemName:"person.crop.circle.fill")!.applyingSymbolConfiguration(.init(scale: .large))! .withTintColor(.white).withRenderingMode(.alwaysOriginal), for:.normal)
-        button.addTarget(self, action: #selector(oneClickTabBar), for: .touchUpInside)
-        return button
-    }()
-    
+
     lazy var topicsViewController = TopicsViewController(numberPhone: numberPhone)
     
     lazy var navigation = UINavigationController(rootViewController: topicsViewController)
+    
+    
+    lazy var researchController = ResearchViewController()
+    lazy var navigationr = UINavigationController(rootViewController: researchController)
     
     func firstScreen() {
         contentView.addSubview(navigation.view)
@@ -105,14 +97,9 @@ class CustomTabBarController: UIViewController {
             firstScreen()
             
         } else if tag == 2 {
-            let researchController = ResearchViewController()
-            contentView.addSubview(researchController.view)
+            
+            contentView.addSubview(navigationr.view)
             researchController.didMove(toParent:self)
-            
-        } else if tag == 3 {
-            
-        } else {
-            
         }
     }
     
@@ -124,19 +111,21 @@ class CustomTabBarController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let width = view.frame.size.width
+        let widthTabBar = width - 170
         topicsViewController.delegateHideBars = self
-        
+        researchController.delegateHideBars = self
         view.addSubview(contentView)
         view.addSubview(customTabBar)
         
         contentView.frame = view.frame
         
-        customTabBar.frame = CGRect(x: 20,
+        customTabBar.frame = CGRect(x: (width / 2) - (widthTabBar / 2),
                                     y: view.frame.maxY - 90,
-                                    width: view.frame.size.width - 60,
+                                    width: widthTabBar,
                                     height: 65)
         
-        [buttonFollowTopicsController, buttonFollowReserchController, buttonFollowAdditional, buttonFollowYorAccuont].forEach { customTabBar.addSubview($0) }
+        [buttonFollowTopicsController, buttonFollowReserchController].forEach { customTabBar.addSubview($0) }
         
         firstScreen()
         
@@ -156,16 +145,7 @@ class CustomTabBarController: UIViewController {
             buttonFollowReserchController.bottomAnchor.constraint(equalTo: customTabBar.bottomAnchor),
             buttonFollowReserchController.widthAnchor.constraint(equalTo: buttonFollowTopicsController.widthAnchor),
             
-            buttonFollowAdditional.leadingAnchor.constraint(equalTo: buttonFollowReserchController.trailingAnchor),
-            buttonFollowAdditional.topAnchor.constraint(equalTo: customTabBar.topAnchor),
-            buttonFollowAdditional.bottomAnchor.constraint(equalTo: customTabBar.bottomAnchor),
-            buttonFollowAdditional.widthAnchor.constraint(equalTo: buttonFollowTopicsController.widthAnchor),
-            
-            buttonFollowYorAccuont.leadingAnchor.constraint(equalTo: buttonFollowAdditional.trailingAnchor),
-            buttonFollowYorAccuont.topAnchor.constraint(equalTo: customTabBar.topAnchor),
-            buttonFollowYorAccuont.bottomAnchor.constraint(equalTo: customTabBar.bottomAnchor),
-            buttonFollowYorAccuont.widthAnchor.constraint(equalTo: buttonFollowTopicsController.widthAnchor),
-            buttonFollowYorAccuont.trailingAnchor.constraint(equalTo: customTabBar.trailingAnchor)
+            buttonFollowReserchController.trailingAnchor.constraint(equalTo: customTabBar.trailingAnchor)
         ]
         
         NSLayoutConstraint.activate(constraints)

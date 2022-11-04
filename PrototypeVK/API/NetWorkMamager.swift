@@ -5,6 +5,7 @@ enum ObtainError: Error {
     case failedConnect
     case failedDecodeData
     case failedGetGetData(debugDescription: String)
+    case unAuthorized
 }
 
 class NetWorkMamager {
@@ -24,12 +25,14 @@ class NetWorkMamager {
             }
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200  {
-                print(httpResponse.statusCode)
-                print(httpResponse)
+//                                print(httpResponse.statusCode)
+//                                print(httpResponse)
             }
             
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201  {
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401  {
                 print(httpResponse.statusCode)
+                result = .failure(.unAuthorized)
+                return
                 
             }
             
@@ -40,7 +43,7 @@ class NetWorkMamager {
             
             if let parsaData = data {
                 guard let posts = try? decoder.decode(type.self, from: parsaData) else {
-                    print(String(data: parsaData, encoding: .utf8) ?? "empty data")
+                    //                    print(String(data: parsaData, encoding: .utf8) ?? "empty data")
                     result = .failure(.failedDecodeData)
                     return
                 }
@@ -51,7 +54,7 @@ class NetWorkMamager {
                 
                 result = .failure(.failedConnect)
             }
-            
+        
         }.resume()
     }
 }

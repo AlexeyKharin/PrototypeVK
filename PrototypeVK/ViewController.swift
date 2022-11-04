@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewVocntroller: UIViewController {
     var arrayTopics: [TopicResultElement] = []
     
     override func viewWillAppear (_ animated: Bool) {
@@ -15,4 +15,3 @@ class ViewController: UIViewController {
     
     }
 }
-

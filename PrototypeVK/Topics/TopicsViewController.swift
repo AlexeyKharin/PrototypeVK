@@ -16,6 +16,8 @@ class TopicsViewController: UIViewController, WKUIDelegate {
     
     var delegateHideBars: HideOrAppearBars?
     
+    let keyChainDataProvider: KeyChainDataProvider = KeyChainDataProvider()
+    
     private var boolForHide: Bool = false {
         didSet {
             if boolForHide {
@@ -89,7 +91,7 @@ class TopicsViewController: UIViewController, WKUIDelegate {
             case .failure(let error):
                 
                 switch error {
-                case .failedConnect:
+                case .failedConnect, .unAuthorized:
                     print("error failedConnect \(error.localizedDescription)")
                     
                 case .failedDecodeData:
@@ -97,6 +99,7 @@ class TopicsViewController: UIViewController, WKUIDelegate {
                     
                 case .failedGetGetData(debugDescription: let description):
                     print("error failedGetGetData")
+                    
                 }
             }
         }
@@ -113,7 +116,7 @@ class TopicsViewController: UIViewController, WKUIDelegate {
             case .failure(let error):
                 
                 switch error {
-                case .failedConnect:
+                case .failedConnect, .unAuthorized:
                     print("error failedConnect \(error.localizedDescription)")
                     
                 case .failedDecodeData:
@@ -242,7 +245,9 @@ extension TopicsViewController {
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { [weak self] _ in
             guard let self = self else { return }
             
-            let  alertCancel = UIAlertController(title: "Предупреждение", message: "При этом приложению и сайту будет доступно ограниченная информация о вас и пользователях", preferredStyle: .alert)
+            self.keyChainDataProvider.remove()
+            
+            let  alertCancel = UIAlertController(title: "Предупреждение", message: "Gриложению и сайту будет доступно ограниченная информация о вас и пользователях", preferredStyle: .alert)
             
             let actionOk = UIAlertAction(title: "Ok", style: .cancel) { _ in  }
             
@@ -260,6 +265,7 @@ extension TopicsViewController {
                 self.presentedViewController?.dismiss(animated: closePage)
             }
             }
+        
         alert.addAction(actionContinue)
         alert.addAction(actionCancel)
         present(alert, animated: true, completion: nil)

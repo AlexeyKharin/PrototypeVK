@@ -4,24 +4,25 @@ import UIKit
 class PhotosViewController: UIViewController {
     
     var indexPath: IndexPath?
+    
     var visibalIndex: [IndexPath] = []
+    
     var closureHideBars: ((Bool) -> Void)?
     
+    var offsetImage: Int = Int()
+    
     private var boolForHide: Bool = false {
-        
         didSet {
             if boolForHide {
                 closureHideBars?(boolForHide)
                 self.hideBars()
+                offsetImage = 87
             } else  {
                 closureHideBars?(boolForHide)
                 self.appearBars()
+                offsetImage = 37
             }
         }
-    }
-    
-    private enum Section {
-        case albumPosts
     }
     
     private enum PresentationStyle: String, CaseIterable {
@@ -154,7 +155,7 @@ class PhotosViewController: UIViewController {
                 self.collectionView.reloadData()
             case .failure(let error):
                 switch error {
-                case .failedConnect:
+                case .failedConnect, .unAuthorized:
                     print("error failedConnect \(error.localizedDescription)")
                 case .failedDecodeData:
                     print("error failedDecodeData")
@@ -165,15 +166,12 @@ class PhotosViewController: UIViewController {
         }
     }
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoElement>?
-    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
         collectionView.toAutoLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.decelerationRate = .fast
-        
         return collectionView
     }()
     
@@ -220,19 +218,6 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController {
     
-    func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource <Section, PhotoElement>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, detailItem: PhotoElement) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompositionalCellPhoto.identifier, for: indexPath) as? CompositionalCellPhoto else { fatalError("Could not create new cell") }
-            cell.photoResultElement = detailItem
-            return cell
-        }
-        
-        // load our initial data
-        let snapshot = snapshotForCurrentState()
-        dataSource!.apply(snapshot, animatingDifferences: true)
-    }
-    
     func generateLayout() -> UICollectionViewLayout {
         let spacing: Double = 0.7
         
@@ -272,18 +257,9 @@ extension PhotosViewController {
         return layout
     }
     
-    private func snapshotForCurrentState() -> NSDiffableDataSourceSnapshot<Section, PhotoElement> {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, PhotoElement>()
-        snapshot.appendSections([Section.albumPosts])
-        let items = arrayPhotoOfTopicElement
-        snapshot.appendItems(items)
-        return snapshot
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-//        getPhotosOfTopic(nameTopic: nameTopic)
         collectionView.reloadData()
     }
     
@@ -369,12 +345,12 @@ extension PhotosViewController: UICollectionViewDelegate {
         
         if height <= view.frame.size.height * 0.6 {
             toFrame = CGRect(x: 0.0,
-                             y: contentOffset + 37,
+                             y: contentOffset + CGFloat(offsetImage),
                              width: width,
                              height: height)
         } else {
             toFrame = CGRect(x: 0.0,
-                             y: contentOffset + 37,
+                             y: contentOffset + CGFloat(offsetImage),
                              width: width,
                              height: view.frame.size.height * 0.5)
         }
@@ -391,10 +367,21 @@ extension PhotosViewController: UICollectionViewDelegate {
             }
         }
         
-        collectionView.imageWithZoomInAnimation(image, duration: 0.4, options: .curveEaseIn, to: toFrame) { _ in
+        collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { _ in
             image.removeFromSuperview()
-            let vc = DetailPhotosViewController(arrayPhotoOfTopicElement: self.arrayPhotoOfTopicElement, indexPath: indexPath)
+            
+            let arrayUIModelDetailPhotoCell = self.arrayPhotoOfTopicElement.map { UIModelDetailPhotoCell(likes: String($0.likes ?? 0), profileImage: $0.user?.profileImage?.medium, image: $0.urls?.small, description: $0.description, usersName: $0.user?.name, likedByUser: $0.likedByUser, id: $0.id, height: $0.height, width: $0.width, callUserName:  $0.user?.username) }
+            
+            let vc = DetailPhotosViewController(arrayUIModelDetailPhotoCell: arrayUIModelDetailPhotoCell, indexPath: indexPath)
             vc.titleTopics.text = self.titleTopics.text
+            
+            let transition = CATransition()
+
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            transition.type = .fade
+            
+            self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(vc, animated: false)
             
             vc.closureHideBars = { hide in
@@ -405,7 +392,6 @@ extension PhotosViewController: UICollectionViewDelegate {
                     self.closureHideBars?(hide)
                 }
             }
-            
         }
     }
 }
