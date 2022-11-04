@@ -187,8 +187,9 @@ class OAth2ViewController: UIViewController, WKNavigationDelegate {
             closePage?(true)
             
             let request = ApiType.getAccessToken(code: code).request
-            NetWorkMamager.obtainData(request: request, type: AccessResult.self) { (result) in
-               
+            NetWorkMamager.obtainData(request: request, type: AccessResult.self) {[weak self] (result) in
+                guard let self = self else { return }
+                
                 self.keyChainDataProvider.remove()
                 
                 switch result {

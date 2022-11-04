@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarcontroller = CustomTabBarController(numberPhone: "+375296534897")
         let userContreoller = UserViewController(userName: "girlwithredhat")
-        //        let auth = AuthViewController()
+//        let auth = AuthViewController()
         let navigation = UINavigationController(rootViewController: tabBarcontroller)
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()

@@ -113,8 +113,10 @@ class CustomTabBarController: UIViewController {
         super.viewDidLoad()
         let width = view.frame.size.width
         let widthTabBar = width - 170
+        
         topicsViewController.delegateHideBars = self
         researchController.delegateHideBars = self
+        
         view.addSubview(contentView)
         view.addSubview(customTabBar)
         

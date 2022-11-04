@@ -328,7 +328,7 @@ extension UserViewController {
     
     func generateLayout() -> UICollectionViewLayout {
         
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { [unowned self] (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             let sectionLayoutKind = Section.allCases[sectionIndex]
             switch (sectionLayoutKind) {
@@ -347,13 +347,14 @@ extension UserViewController {
                     
                 case .collections:
                     return self.generateCollectionsLayout()
-                    
+
                 }
             }
         }
         
         return layout
     }
+    
     
     func generateMapLayout() -> NSCollectionLayoutSection {
         
@@ -475,7 +476,9 @@ extension UserViewController: UICollectionViewDataSource {
             withReuseIdentifier: CollectionHeader.identifier,
             for: indexPath) as? CollectionHeader else { return  UICollectionReusableView() }
         
-        headerView.dataTransferInt = { switchIndex in
+        headerView.dataTransferInt = {[weak self] switchIndex in
+            guard let self = self  else { return }
+          
             self.updateSelectedStyle(switchedIndex: switchIndex)
         }
         return headerView
@@ -539,7 +542,7 @@ extension UserViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch selectedStyle {
-        case .likes: break
+        case .likes: 
             let item = arrayLikedPhotosOfUser[indexPath.item]
             let photoUrl = item.urls?.small
             guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
@@ -579,7 +582,9 @@ extension UserViewController: UICollectionViewDelegate {
                 image.frame = cell.frame
             }
             
-            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { _ in
+            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { [weak self] _ in
+                guard let self = self else { return }
+                
                 image.removeFromSuperview()
                 
                 let arrayUIModelDetailPhotoCell: [UIModelDetailPhotoCell] = self.arrayPhotosOfUser.map { UIModelDetailPhotoCell(likes: String($0.likes ?? 0), profileImage: $0.user?.profileImage?.medium, image: $0.urls?.small, description: $0.description, usersName: $0.user?.name, likedByUser: $0.likedByUser, id: $0.id, height: $0.height, width: $0.width, callUserName:  $0.user?.username) }
@@ -655,7 +660,9 @@ extension UserViewController: UICollectionViewDelegate {
                 image.frame = cell.frame
             }
             
-            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { _ in
+            collectionView.imageWithZoomInAnimation(image, duration: 0.3, options: .curveEaseIn, to: toFrame) { [weak self] _ in
+                guard let self = self else { return }
+                
                 image.removeFromSuperview()
                 
                 let arrayUIModelDetailPhotoCell: [UIModelDetailPhotoCell] = self.arrayPhotosOfUser.map { UIModelDetailPhotoCell(likes: String($0.likes ?? 0), profileImage: $0.user?.profileImage?.medium, image: $0.urls?.small, description: $0.description, usersName: $0.user?.name, likedByUser: $0.likedByUser, id: $0.id, height: $0.height, width: $0.width, callUserName:  $0.user?.username) }

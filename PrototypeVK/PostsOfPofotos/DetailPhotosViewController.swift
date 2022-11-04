@@ -127,7 +127,7 @@ class DetailPhotosViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 
@@ -294,10 +294,11 @@ extension DetailPhotosViewController: OpenUserViewController {
         
         let vc = UserViewController(userName: userName)
         
-        vc.closureHideBars = { bool in
+        vc.closureHideBars = { [weak self] bool in
+            guard let self = self else { return }
             self.closureHideBars?(bool)
         }
         
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
